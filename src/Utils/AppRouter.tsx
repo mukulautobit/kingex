@@ -12,6 +12,7 @@ import ProtectedRoute from "../components/proctedRoute/ProctedRoute";
 import Login from "../pages/login/Login";
 import OtpAuthentication from "../pages/otpAuthentication/OtpAuthentication";
 import AllList from "../pages/allList/AllList";
+import Profile from "../pages/profile/Profile";
 
 
 
@@ -81,6 +82,20 @@ export const AppRouter = createBrowserRouter([
   },
   {
     path: 'allList',
-    element : <AllList/>
+    element : (
+      <ProtectedRoute>
+        <AllList/>
+      </ProtectedRoute>
+    ),
+    
+    
+  },
+  {
+    path : "/profile",
+    element : (
+      <ProtectedRoute>
+        <Profile/>
+      </ProtectedRoute>
+    ),
   }
 ]);

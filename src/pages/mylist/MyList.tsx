@@ -41,8 +41,11 @@ const MyList = () => {
                 {Array.from({ length: 10 }).map((_, index) => (
                     <div onClick={()=>{handleCardClick(index)}}>
                         <CommoditiesItem
-                            key={index}
-                            priceColor={index % 2 === 0 ? "text-[#FF3B30]" : "text-[#00B306]"}
+                  tradeName={"SBI"}
+                        exchange={"buy"}
+                         ltp={5}
+                    pnl={4}                 // ✅ FINAL VALUE PASSED
+                timestamp={1769246240}
                         />
                     </div>
                 ))}
@@ -52,3 +55,5 @@ const MyList = () => {
 }
 
 export default MyList
+
+// 

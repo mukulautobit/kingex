@@ -18,15 +18,15 @@ const TrendingListDetails = () => {
 
     const navigate = useNavigate();
 
-    const handleCardClick = (index:number)=>{
+    const handleCardClick = (index: number) => {
         const data = {
-            value : "970272",
-            name : "abcd"
+            value: "970272",
+            name: "abcd"
         }
 
         navigate("/instrumentDetails", {
-            state : {
-                instrumentData : data
+            state: {
+                instrumentData: data
             }
         })
     }
@@ -130,14 +130,17 @@ const TrendingListDetails = () => {
             </div>
             {/* -------------Cards DATA---------------- */}
             <div className="flex flex-col py-2.5 px-5">
-                {Array.from({ length: 10 }).map((_, index) => (
-                    <div onClick={()=>{handleCardClick(index)}}>
+                {/* {Array.from({ length: 10 }).map((_, index) => ( */}
+                    <div onClick={() => { handleCardClick(1) }}>
                         <CommoditiesItem
-                            key={index}
-                            priceColor={index % 2 === 0 ? "text-[#FF3B30]" : "text-[#00B306]"}
+                            tradeName={"SBI"}
+                            exchange={"buy"}
+                            ltp={5}
+                            pnl={4}                 // ✅ FINAL VALUE PASSED
+                            timestamp={1769246240}
                         />
                     </div>
-                ))}
+                {/*  ))} */}
             </div>
         </>
 

@@ -1,63 +1,65 @@
-import React from 'react'
-interface CommodityRowProps {
-  priceColor: string;
+import React from "react";
+
+interface CommoditiesItemProps {
+  tradeName: string;
+  exchange: string;
+  ltp: number;
+  pnl: number;
+  timestamp: number;
 }
-const CommoditiesItem = ({ priceColor }: CommodityRowProps) => {
+
+const formatTime = (timestamp: number) =>
+  new Date(timestamp * 1000).toLocaleTimeString("en-IN", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+
+const CommoditiesItem = ({
+  tradeName,
+  exchange,
+  ltp,
+  pnl,
+  timestamp,
+}: CommoditiesItemProps) => {
+  const isProfit = pnl >= 0;
+
   return (
-    <div
-      className="
-        flex items-center justify-between
-        py-[10px]
-        border-b border-[#181818]
-      "
-    >
-      {/* Left Info */}
+    <div className="flex items-center justify-between py-[10px] border-b border-[#181818]">
+      
+      {/* LEFT */}
       <div className="flex flex-col gap-[2px]">
-        <span
-          className="
-            font-poppins font-medium
-            text-[13px] leading-[18px]
-            text-white
-          "
-        >
-          CRUDEOIL FUT
+        <span className="text-white text-[13px] font-medium">
+          {tradeName}
         </span>
 
-        <span
-          className="
-            font-poppins font-light
-            text-[11px] leading-[16px]
-            text-[#8E8E8E]
-          "
-        >
-          MCX 19 FEB 26
+        <span className="text-[#8E8E8E] text-[11px] font-light">
+          {exchange} | {formatTime(timestamp)}
         </span>
       </div>
 
-      {/* Right Price */}
+      {/* RIGHT */}
       <div className="flex flex-col items-end gap-[2px]">
         <span
-          className={`
-            font-poppins font-medium
-            text-[14px] leading-[21px]
-            ${priceColor}
-          `}
+          className={`text-[14px] font-medium ${
+            isProfit ? "text-[#00B306]" : "text-[#FF3B30]"
+          }`}
         >
-          25,289.30
+           {(ltp ?? 0).toLocaleString()}
         </span>
 
         <span
-          className="
-            font-poppins font-light
-            text-[11px] leading-[16px]
-            text-[#8E8E8E]
-          "
+          className={`text-[11px] font-light ${
+            isProfit ? "text-[#00B306]" : "text-[#FF3B30]"
+          }`}
         >
-          +132.40 (0.53%)
+          {pnl > 0 ? "+" : ""}
+           {(pnl ?? 0).toFixed(2)}
         </span>
       </div>
     </div>
   );
-}
+};
 
-export default CommoditiesItem
+export default CommoditiesItem;

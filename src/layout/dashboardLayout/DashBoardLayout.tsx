@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom'
 
 const DashBoardLayout = () => {
   return (
-    <div className='h-[945px]'>
+    <div className='h-full'>
       <Outlet/>
       <BottomBar/>
     </div>
