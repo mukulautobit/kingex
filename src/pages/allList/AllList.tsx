@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import SearchHeaderBar from '../../components/searchHeaderBar/SearchHeaderBar';
 import CommoditiesItem from '../../components/commoditiesItem/CommoditiesItem';
 type TabId = "all" | "cash";
@@ -49,9 +49,9 @@ const AllList = () => {
             <div className="w-full max-w-[412px] px-[20px] pt-[10px]">
                 {activeTab === "all" && (
                     <div className="flex flex-col">
-                        {[...Array(4)].map((_, index) => {
-                            const priceColor =
-                                index % 2 === 0 ? "text-[#FF3B30]" : "text-[#00B306]";
+                        {[...Array(4)].map((_) => {
+                            // const priceColor =
+                            //     index % 2 === 0 ? "text-[#FF3B30]" : "text-[#00B306]";
 
                             return (
                                 <CommoditiesItem

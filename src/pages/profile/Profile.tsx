@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 import avatar from "../../assets/icons/avatar.svg";
 import wallet from "../../assets/icons/wallet.svg";
 import bank from "../../assets/icons/bank.svg";

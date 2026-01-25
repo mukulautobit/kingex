@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import type { RootState } from "../../store/Store";
 // import { hideToasty } from "../../store/slices/notificationSlice";
-import { useAppSelector } from "../../store/hook";
+// import { useAppSelector } from "../../store/hook";
 import { hideToasty } from "../../store/slices/notificationSlice";
 // import "./Toasty.css";
 
@@ -40,15 +40,17 @@ const Toasty = () => {
   const isError =
     data.type === "error" || data.status?.toLowerCase() === "failed";
 
-  const getClassName = () => {
-    let classes = "toasty-pill";
-    if (isSuccess) classes += " toasty-success";
-    else if (isError) classes += " toasty-error";
-    else classes += " toasty-info";
+    console.log(isError)
 
-    if (isExiting) classes += " toasty-exit";
-    return classes;
-  };
+  // const getClassName = () => {
+  //   let classes = "toasty-pill";
+  //   if (isSuccess) classes += " toasty-success";
+  //   else if (isError) classes += " toasty-error";
+  //   else classes += " toasty-info";
+
+  //   if (isExiting) classes += " toasty-exit";
+  //   return classes;
+  // };
 
   const getDisplayText = () => {
     if (isOrderToast) {

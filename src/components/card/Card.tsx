@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { formatPrice, usePrevious } from "../../Utils/HelperFunction";
 // import notFavouriteTickLight from "../../assets/icons/notFavrouiteTickLight.svg";
 // import favouriteTickLight from "../../assets/icons/favrouiteTickLight.svg";
 // import notFavouriteTick from "../../assets/icons/notFavrouiteTick.svg";
 // import favouriteTick from "../../assets/icons/favrouiteTick.svg";
-import { useAppSelector } from "../../store/hook";
+// import { useAppSelector } from "../../store/hook";
 // import type { OutletContextType } from "../../layout/MainLayout";
-import { useOutletContext } from "react-router-dom";
+// import { useOutletContext } from "react-router-dom";
 import flagIcon from "../../assets/icons/flagslogo.svg"
 
 export interface CardProps {
@@ -35,14 +35,16 @@ const Card = ({
   close,
   pip,
   timestamp,
-  cardIcon,
+  // cardIcon,
   onClick,
   active,
-  favourites,
+  // favourites,
 }: CardProps) => {
   const askPrice = formatPrice(ask, pip);
   const bidPrice = formatPrice(bid, pip);
 
+
+  console.log(askPrice, bidPrice)
   // 🌈 Dynamic colors
   const [askColor, setAskColor] = useState("text-white");
   const [bidColor, setBidColor] = useState("text-white");
@@ -69,6 +71,7 @@ const Card = ({
     // if equal → keep previous color
   }, [ask, prevAsk]);
 
+  console.log(active)
   //  BID COLOR LOGIC (FIXED)
   useEffect(() => {
     if (prevBid == null) return;

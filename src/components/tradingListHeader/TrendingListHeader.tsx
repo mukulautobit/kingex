@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 import lineFilter from "../../assets/icons/lineFilter.svg"
 import searchtwo from "../../assets/icons/searchtwo.svg"
 import leftarrow from "../../assets/icons/leftarrow.svg"
 import { useNavigate } from 'react-router-dom'
-import TrendingListDetails from '../trendingListDetails/TrendingListDetails'
+// import TrendingListDetails from '../trendingListDetails/TrendingListDetails'
 
 export interface trendingListHeaderProps {
  label:string

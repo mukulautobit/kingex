@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import HeaderBar from '../../components/searchHeader/HeaderBar'
 import filterIcon from "../../assets/icons/lineFilter.svg"
 import searchtwo from "../../assets/icons/searchtwo.svg"
@@ -8,7 +8,7 @@ import usflag from "../../assets/icons/usflag.svg"
 import { useAppDispatch, useAppSelector } from '../../store/hook'
 import type { RootState } from "../../store/Store"
 import { fetchInstrumentsByCategory } from "../../store/slices/instrumentsSlice"
-import { calculatePnL } from "../../Utils/HelperFunction"
+// import { calculatePnL } from "../../Utils/HelperFunction"
 
 export const tabs = [
   { id: "positions", label: "Positions", width: "w-[74px]" },
@@ -32,9 +32,9 @@ const Portfolio = () => {
   );
 
   // open positions
-  const positions = useAppSelector(
-    (state: RootState) => state.positions.positions || []
-  );
+  // const positions = useAppSelector(
+  //   (state: RootState) => state.positions.positions || []
+  // );
 
   // console.lo
   // stock instruments

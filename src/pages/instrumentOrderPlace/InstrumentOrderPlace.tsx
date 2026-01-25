@@ -4,9 +4,9 @@ import TrendingListHeader from "../../components/tradingListHeader/TrendingListH
 import rightArrowblack from "../../assets/icons/rightarrowblack.svg";
 import exchangeIcon from "../../assets/icons/exchangeIcon.svg";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
-import { placeNewOrder, type PlaceOrderPayload } from "../../store/slices/ordersSlice";
+import { type PlaceOrderPayload } from "../../store/slices/ordersSlice";
 import { placeOrderStock } from "../../service/api";
-import { hideToasty, showToasty } from "../../store/slices/notificationSlice";
+import {  showToasty } from "../../store/slices/notificationSlice";
 import { fetchAccounts } from "../../store/slices/accountSlice";
 
 interface Account {

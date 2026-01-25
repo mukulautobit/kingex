@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 // import SearchHeader from '../../components/searchHeader/SearchHeader'
 import InfoHeader from '../../components/infoheader/InfoHeader'
 import MarketOptionsOffers from '../../components/marketOptions/MarketOptionsOffers'
 import Commodities from '../../components/commodities/Commodities'
-import trendingCommodities from "../../assets/icons/trendingComodities.svg"
+// import trendingCommodities from "../../assets/icons/trendingComodities.svg"
 import searchIcon from "../../assets/icons/searchIcon.svg"
 import HeaderBar from '../../components/searchHeader/HeaderBar'
 import { useAppDispatch, useAppSelector } from '../../store/hook'
@@ -17,7 +17,7 @@ import { fetchAccounts } from '../../store/slices/accountSlice'
 
 const Dashboard = () => {
 
-  const { data, error, status } = useAppSelector(state => state.categories);
+  const { data } = useAppSelector(state => state.categories);
   const apiStatus = useAppSelector(state => state.websockets.apiStatus);
   const dispatch = useAppDispatch()
   const [categories, setCategories] = useState<string[]>([]);

@@ -1,5 +1,5 @@
-import type { ComponentType, SVGProps } from "react";
-import trendingComodities from "../../assets/icons/trendingComodities.svg"
+// import type { ComponentType, SVGProps } from "react";
+// import trendingComodities from "../../assets/icons/trendingComodities.svg"
 import rightArrow from "../../assets/icons/rightArrow.svg"
 import { Link } from "react-router-dom";
 

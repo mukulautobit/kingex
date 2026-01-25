@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import otpIcon from "../../assets/icons/optImage.svg"
 import tickIcon from "../../assets/icons/loginTick.svg"
 import loderIcon from "../../assets/icons/loader.svg"
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 
-type ScreenState = "otp" | "loading" | "success";
+// type ScreenState = "otp" | "loading" | "success";
 
 
 const LoginSuccessfulPage = () => {

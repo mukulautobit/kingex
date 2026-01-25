@@ -27,7 +27,7 @@ import {
 } from "../store/slices/notificationSlice";
 // import { fetchAccountBalance } from "../store/slices/accountSlice";
 import { fetchOpenOrders } from "../store/slices/openOrdersSlice";
-import { updateInstrumentFeed } from "../store/slices/instrumentsSlice";
+// import { updateInstrumentFeed } from "../store/slices/instrumentsSlice";
 
 type StreamDataPayload = {
   bid?: number[];
@@ -120,7 +120,7 @@ let eventClient: WebSocketClient;
 // const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uIjoiQUNDLTlmMThjMjNkOTU4ODRmMzE4OTZhMGIwNmVjYmE3NDY2IiwiYWNjaWQiOiJTRVAyNS0xYzdlODRlNS1hNmNmLTQxMzEtYTFkYS1hZDE5Zjc5MmVhMjAifQ.xPUMPaSLH8JQ25IhevETYOnh3zPrh76waUsHe2burYU"
 export const initializeSockets = (store: Store) => {
   // const token = getAuthToken(store);
-  const state = store.getState() as RootState;
+  // const state = store.getState() as RootState;
   // const token = state.auth.user?.token;
 //   const  token = localStorage.getItem("AUTHENTICATION_TOKEN")
 const token = TOKEN

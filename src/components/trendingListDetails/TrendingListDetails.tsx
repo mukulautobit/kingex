@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import CommoditiesItem from '../commoditiesItem/CommoditiesItem';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 
 const tabs = ["Options", "Stocks", "MCX"];
@@ -23,7 +23,7 @@ const TrendingListDetails = () => {
             value: "970272",
             name: "abcd"
         }
-
+        console.log(index)
         navigate("/instrumentDetails", {
             state: {
                 instrumentData: data

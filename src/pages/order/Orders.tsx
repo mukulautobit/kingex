@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import filterIcon from "../../assets/icons/lineFilter.svg"
 import searchtwo from "../../assets/icons/searchtwo.svg"
 import HeaderBar from '../../components/searchHeader/HeaderBar'
 import RegularCard from '../../components/regularCard/RegularCard'
 import { useAppDispatch, useAppSelector } from '../../store/hook'
-import { useDispatch } from 'react-redux'
+// import { useDispatch } from 'react-redux'
 import type { RootState } from '../../store/Store'
 import { fetchOpenOrders } from '../../store/slices/openOrdersSlice'
 // import PositionCard from '../../components/positionCard/PositionCard'

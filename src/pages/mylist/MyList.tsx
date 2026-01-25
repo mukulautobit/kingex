@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import HeaderBar from "../../components/searchHeader/HeaderBar";
 import filterIcon from "../../assets/icons/lineFilter.svg";
 import plusIcon from "../../assets/icons/plusIcon.svg";

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import HeaderBar from '../../components/searchHeader/HeaderBar'
 import filterIcon from "../../assets/icons/lineFilter.svg"
 import searchtwo from "../../assets/icons/searchtwo.svg"
@@ -44,6 +44,7 @@ const History = () => {
     setHistory(res)
 
   }
+  console.log(history)
 
   useEffect(()=>{
     console.log("HISTORY")

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import CommoditiesHeader, { type CommoditiesHeaderProps } from '../commoditiesheader/CommoditiesHeader'
-import CommoditiesItem from '../commoditiesItem/CommoditiesItem'
+// import CommoditiesItem from '../commoditiesItem/CommoditiesItem'
 import { useNavigate } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../store/hook'
-import { fetchPositions } from '../../store/slices/positionsSlice'
-import {calculatePnL, formatEpochToTime} from "../../Utils/HelperFunction"
+// import { fetchPositions } from '../../store/slices/positionsSlice'
+// import {calculatePnL, formatEpochToTime} from "../../Utils/HelperFunction"
 import type { RootState } from '../../store/Store'
 import { fetchInstrumentsByCategory, setSelectedInstrument } from '../../store/slices/instrumentsSlice'
 import Card from '../card/Card'
@@ -110,7 +110,7 @@ useEffect(() => {
               pip={instrument.static_data.ticksize}
               timestamp={instrument.overnight_margin_time}
               cardIcon={instrument.icon}
-              onClick={(e) => handleCardClick(instrument)}
+              onClick={() => handleCardClick(instrument)}
               active="forex"
               favourites={true}
             />
