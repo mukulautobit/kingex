@@ -48,7 +48,7 @@ const Login = () => {
     <div 
     className="
     min-h-screen
-      bg-gradient-to-tr from-[#FACA46] via-[#0D0D0D] to-black flex flex-col justify-between px-[20px] pt-[47px] pb-[20px]"
+     md:m-w-[412px] w-full   bg-gradient-to-tr from-[#FACA46] via-[#0D0D0D] to-black flex flex-col justify-between px-[20px] pt-[47px] pb-[20px]"
     >
       
       {/* ---------- TOP ---------- */}
@@ -64,7 +64,7 @@ const Login = () => {
         </div>
 
         {/* Content */}
-        <div className="w-[353px] flex flex-col gap-[22px]">
+        <div className="m-w-[353px] flex flex-col gap-[22px]">
           
           {/* Header */}
           <div className="flex flex-col gap-[4px]">
@@ -94,7 +94,7 @@ const Login = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="9456-952635"
-                className={`w-[305px] h-[44px] px-[10px] bg-[#0C0C0C] rounded-[10px]
+                className={`w-full m-w-[305px] mx-auto h-[44px] px-[10px] bg-[#0C0C0C] rounded-[10px]
                   text-[14px] text-white outline-none
                   ${error ? "border border-[#B30000]" : ""}
                 `}
@@ -111,7 +111,7 @@ const Login = () => {
       </div>
 
       {/* ---------- BOTTOM ---------- */}
-      <div className="w-[353px] mx-auto flex flex-col gap-[10px]">
+      <div className="w-full max-w-[353px] mx-auto flex flex-col gap-[10px]">
         
         <p className="text-[10px] text-white text-center">
           KINGEX SECURITIES PRIVATE LIMITED SEBI Regn No.

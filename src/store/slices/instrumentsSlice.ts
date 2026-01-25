@@ -66,7 +66,9 @@ export const fetchInstrumentsByCategory = createAsyncThunk(
   async (categoryName: string, { rejectWithValue }) => {
     try {
       // let query = `fintrabit.instruments[category[0].name="${categoryName}"]`
-
+      if (!apiClient) {
+        throw new Error("WebSocket API client not initialized");
+      }
       console.log("INSTRUMENT_CALL", categoryName)
       const response = await apiClient.send<Instrument[]>("query", {
         query: `fintrabit.instruments[category[0].name="${categoryName}"]`,

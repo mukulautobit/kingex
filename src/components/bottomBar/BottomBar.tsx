@@ -11,7 +11,7 @@ const BottomBar = () => {
       className="
         fixed bottom-0 block left-1/2 -translate-x-1/2
         z-[100]
-        w-[412px] h-[97px]
+        max-w-[412px] h-[97px]
         p-[16px]
         backdrop-blur-sm
       "

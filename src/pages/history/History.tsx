@@ -67,7 +67,7 @@ const History = () => {
       <div className="bg-blackprimary h-screen">
 
       {/* ---------- TABS ---------- */}
-      <div className="w-full max-w-[412px] h-[44px] px-[20px] flex gap-[10px] border-b border-[#181818]">
+      <div className="w-full md:max-w-[412px] h-[44px] px-[20px] flex gap-[10px] border-b border-[#181818]">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
 
@@ -92,7 +92,7 @@ const History = () => {
       </div>
 
       {/* ---------- TAB CONTENT ---------- */}
-      <div className="w-full max-w-[412px]">
+      <div className="w-full md:max-w-[412px]">
         {activeTab === "regular" && (
           <div className="flex flex-col">
             {historyRegularData.map((item) => (

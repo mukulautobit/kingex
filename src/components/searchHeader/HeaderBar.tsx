@@ -37,7 +37,7 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
         {leftIcon ? (
           <img src={leftIcon} className="w-5 h-5" />
         ) : (
-          <span className="text-white font-poppins font-medium text-[14px]">
+          <span className="text-white font-poppins font-medium text-[14px]" onClick={()=>navigate("/profile")}>
             {leftLabel}
           </span>
         )}

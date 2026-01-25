@@ -18,14 +18,14 @@ const HistoryRegularCard: React.FC<HistoryRegularCardProps> = ({
   return (
     <div
       className="
-        w-[412px] h-[104px]
+        m-w-[412px] h-[104px]
         bg-[#0D0D0D]
         border-b border-[#181818]
         px-[20px] py-[10px]
         flex flex-col
       "
     >
-      <div className="w-full h-[84px] flex flex-col">
+      <div className="w-full  h-[84px] flex flex-col">
         
         {/* ---------- TOP ROW ---------- */}
         <div className="flex justify-between items-center h-[33px]">

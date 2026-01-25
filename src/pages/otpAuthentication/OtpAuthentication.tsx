@@ -4,6 +4,8 @@ import tickIcon from "../../assets/icons/loginTick.svg";
 import loderIcon from "../../assets/icons/loader.svg";
 import { useNavigate, useLocation } from "react-router-dom";
 import { verifyOtp } from "../../service/api";
+// import { initializeSockets } from "../../service/socketService";
+// import { store } from "../../store/Store";
 
 /* ---------------- SUCCESS SCREEN ---------------- */
 
@@ -82,6 +84,11 @@ console.log(phone)
 
     // assume success if API returns ok
     setScreen("success");
+    if(res.status === 'success'){
+      localStorage.setItem("token", res?.data.token)
+      
+    }
+    // initializeSockets(store)
   } catch (err) {
     console.log(err);
     alert("Invalid OTP");

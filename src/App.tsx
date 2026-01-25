@@ -1,24 +1,27 @@
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import { RouterProvider } from "react-router-dom";
 
 import './App.css'
 // import Dashboard from './pages/dashboard/Dashboard'
 import { AppRouter } from './Utils/AppRouter';
-import { initializeSockets } from './service/socketService';
-import { store } from './store/Store';
+// import { initializeSockets } from './service/socketService';
+// import { store } from './store/Store';
+// import { useEffect } from "react";
 // import DashBoardLayout from './layout/dashboardLayout/DashBoardLayout';
 // import Toasty from "./components/toast/Toasty"
 
 function App() {
   // initializeSockets
-  useEffect(()=>{
-          initializeSockets(store)
-      console.log("initilizaSpocket")
-  },[])
+  // useEffect(()=>{
+  //   // if(localStorage.getItem("ASSESS")){
+  //      initializeSockets(store)
+  //     console.log("initilizaSpocket")
+  //   // }      
+  // },[])
 
   return (
     <>
-    <div className="max-w-[412px] mx-auto min-h-screen bg-blackprimar">
+    <div className="w-full md:max-w-[412px] mx-auto h-screen  bg-blackprimar">
       {/* <Toasty/> */}
     <RouterProvider router={AppRouter}/>
     </div>
