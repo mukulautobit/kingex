@@ -120,7 +120,7 @@ const InstrumentOrderPlace = () => {
   value = value.replace(/^0+(?=\d)/, "");
 
   if (value === "") {
-    setQuantity("");
+    // setQuantity("");
   } else {
     setQuantity(Number(value));
   }
