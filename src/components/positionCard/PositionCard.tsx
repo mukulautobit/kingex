@@ -2,7 +2,7 @@ import React from "react";
 
 export interface PositionCardProps {
   symbol: string;        // EURUSD
-  profit: string;        // +0.58
+  profit: number;        // +0.58
   profitPositive?: boolean;
   type: string;          // Buy 0.01
   time: string;          // 2025.09.15 | 09:05:47

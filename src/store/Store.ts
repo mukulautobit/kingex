@@ -13,7 +13,7 @@ import quotesReducer from "./slices/quotesSlice";
 import historyOrdersReducer from "./slices/historyOrdersSlice";
 import historyPositionsReducer from "./slices/historyPositionsSlice";
 import notificationReducer from "./slices/notificationSlice";
-// import accountsReducer from "./slices/accountSlice";
+import accountsReducer from "./slices/accountSlice";
 import openOrdersReducer from "./slices/openOrdersSlice";
 // import authReducer from "./slices/authSlice";
 import ordersReducer from "./slices/ordersSlice"
@@ -35,7 +35,7 @@ const rootReducer = {
   historyOrders: historyOrdersReducer,
   historyPositions: historyPositionsReducer,
   notification: notificationReducer,
-//   accounts: accountsReducer,
+  accounts: accountsReducer,
   openOrders: openOrdersReducer,
   orders : ordersReducer,
 //   auth: authReducer,

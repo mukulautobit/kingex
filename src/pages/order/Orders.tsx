@@ -1,8 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import filterIcon from "../../assets/icons/lineFilter.svg"
 import searchtwo from "../../assets/icons/searchtwo.svg"
 import HeaderBar from '../../components/searchHeader/HeaderBar'
 import RegularCard from '../../components/regularCard/RegularCard'
+import { useAppDispatch, useAppSelector } from '../../store/hook'
+import { useDispatch } from 'react-redux'
+import type { RootState } from '../../store/Store'
+import { fetchOpenOrders } from '../../store/slices/openOrdersSlice'
 // import PositionCard from '../../components/positionCard/PositionCard'
 
 type TabId = "regular" | "mcx";
@@ -25,6 +29,22 @@ export const regularOrders = Array.from({ length: 4 }).map((_, i) => ({
 
 const Orders = () => {
    const [activeTab, setActiveTab] = useState<TabId>("regular");
+
+   const dispatch = useAppDispatch()
+
+   const { orders } = useAppSelector(state => state.openOrders)
+   const apiStatus = useAppSelector((state: RootState) => state.websockets.apiStatus);
+
+    console.log(orders)
+
+   useEffect(()=>{
+     if (apiStatus === "connected") {
+     dispatch(fetchOpenOrders())
+     }
+
+   },[apiStatus, dispatch])
+
+
   return (
     <div>
        <HeaderBar
@@ -68,21 +88,30 @@ const Orders = () => {
       {/* ---------- TAB CONTENT ---------- */}
       <div className="w-full max-w-[412px]">
         {activeTab === "regular" && (
-          <div className="flex flex-col">
-            {regularOrders.map((order) => (
-              <RegularCard
-                key={order.id}
-                symbol={order.symbol}
-                fromPrice={order.fromPrice}
-                toPrice={order.toPrice}
-                orderType={order.orderType}
-                quantity={order.quantity}
-                dateTime={order.dateTime}
-                showSL={order.showSL}
-              />
-            ))}
-          </div>
-        )}
+  <div className="flex flex-col">
+
+    {orders.length === 0 ? (
+      <div className="p-[20px] text-[12px] text-grayprimary">
+        No open orders
+      </div>
+    ) : (
+      orders.map((order: any) => (
+        <RegularCard
+          key={order.id}
+          symbol={order.trading_name || "ICIC"}
+          fromPrice={order.price.toString()}          //  price
+          toPrice={"--"}                              // optional
+          orderType={`${order.side.toUpperCase()} ${order.order_type}`}
+          quantity={order.placed_qty.toString()}
+          dateTime={new Date(order.placed_time * 1000).toLocaleString()}
+          showSL={true}
+        />
+      ))
+    )}
+
+  </div>
+)}
+
 
         {activeTab === "mcx" && (
           <div className="p-[20px] text-[12px] text-grayprimary">

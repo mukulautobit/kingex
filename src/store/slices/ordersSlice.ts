@@ -62,12 +62,14 @@ export const placeNewOrder = createAsyncThunk(
        if (!apiClient) {
         return rejectWithValue("WebSocket not connected");
       }
+      console.log("before call")
       const response = await apiClient.send<OrderResponse>(
         "order/place",
         orderPayload
       );
-
+      console.log("after response")
       if (response.status === "success") {
+        console.log("order Placed")
         dispatch(
           setOrderStatus({
             status: "succeeded",

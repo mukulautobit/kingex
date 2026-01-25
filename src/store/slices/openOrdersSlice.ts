@@ -307,7 +307,7 @@ export const openOrdersSlice = createSlice({
   initialState,
   reducers: {
     // Reducer to handle order updates from a WebSocket stream can be added here later
-    // ✅ Reducer to remove a canceled order from the state
+    //  Reducer to remove a canceled order from the state
     removeOrder: (state, action: PayloadAction<string>) => {
       state.orders = state.orders.filter(
         (order) => order.id !== action.payload

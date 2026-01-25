@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HeaderBar from '../../components/searchHeader/HeaderBar'
 import filterIcon from "../../assets/icons/lineFilter.svg"
 import searchtwo from "../../assets/icons/searchtwo.svg"
 import HistoryRegularCard from '../../components/historyRegularCard/HistoryRegularCard';
+import { fetchHistory } from '../../service/api';
 
 type TabId = "regular" | "mcx";
 
@@ -32,6 +33,22 @@ export const historyRegularData = [
 const History = () => {
 
   const [activeTab, setActiveTab] = useState<TabId>("regular");
+
+  const [history , setHistory] = useState();
+
+  const getData = async()=>{
+
+    const res = await fetchHistory()
+
+    console.log(res)
+    setHistory(res)
+
+  }
+
+  useEffect(()=>{
+    console.log("HISTORY")
+    getData()
+  },[])
 
   return (
     <div>

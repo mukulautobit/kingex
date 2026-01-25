@@ -1,9 +1,18 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import TrendingListHeader from "../../components/tradingListHeader/TrendingListHeader";
 import rightArrowblack from "../../assets/icons/rightarrowblack.svg";
 import exchangeIcon from "../../assets/icons/exchangeIcon.svg";
-import { useAppDispatch } from "../../store/hook";
+import { useAppDispatch, useAppSelector } from "../../store/hook";
+import { placeNewOrder, type PlaceOrderPayload } from "../../store/slices/ordersSlice";
+import { placeOrderStock } from "../../service/api";
+import { hideToasty, showToasty } from "../../store/slices/notificationSlice";
+import { fetchAccounts } from "../../store/slices/accountSlice";
+
+interface Account {
+  id: string;
+  username: string;
+}
 
 const InstrumentOrderPlace = () => {
   const location = useLocation();
@@ -20,31 +29,102 @@ const InstrumentOrderPlace = () => {
   const [value, setValue] = useState<"intraday" | "longterm">("intraday");
   const [dragX, setDragX] = useState(0);
   const [confirmed, setConfirmed] = useState(false);
+  const selectedInstrumentId = useAppSelector((state) => state.instruments.selectedInstrumentId)
+  const accountsData = useAppSelector(
+    (state) => state.accounts.data as Account[]
+  );
+  const accountUsernames = accountsData.map((acc) => acc.username);
+  const [selectedAccount, setSelectedAccount] = useState<string>("");
+  // console.log(selectedInstrumentId)
+
+  useEffect(() => {
+    if (accountUsernames.length > 0 && !selectedAccount) {
+      setSelectedAccount(accountUsernames[0]);
+    }
+  }, [accountUsernames, selectedAccount]);
 
   const dispatch = useAppDispatch()
 
   const maxDrag = 230; // width - knob size
 
+    useEffect(()=>{
+      dispatch(fetchAccounts())
+    },[])
 
-  const handleSlideConfirm = () => {
-  if (!instrumentData) return;
+  const handleSlideConfirm = async () => {
+    if (!instrumentData) return;
 
-  const orderPayload = {
-    instrumentId: instrumentData.instrument_id,
-    tradingName: instrumentData.trading_name,
-    side: instrumentData.side,          // buy / sell
-    quantity,
-    // exchange,
-    tradeType: value,                   // intraday / longterm
-    price: instrumentData?.price,
+    const selectedAccountId =
+      accountsData.find(
+        (acc) => acc.username === selectedAccount
+      )?.id || ""
+
+    // const orderPayload = {
+    //   account_id:selectedAccountId,
+    //   instrumentId: selectedInstrumentId,
+    //   tradingName: instrumentData.trading_name,
+    //   side: instrumentData.side,          // buy / sell
+    //   quantity,
+    //   // exchange,
+    //   tradeType: value,                   // intraday / longterm
+    //   price: instrumentData?.price,
+    // };
+    console.log(accountsData, accountUsernames)
+    if (!selectedInstrumentId) {
+      console.error("Instrument ID missing");
+      return;
+    }
+
+    console.log(selectedAccountId)
+    const payload: PlaceOrderPayload = {
+      account_id: selectedAccountId,
+      instrument_id: selectedInstrumentId,
+      order_type: "market",
+      price: instrumentData.price,
+      qty: quantity,
+      side: "sell", // literal, not string
+      stoploss: 4,
+      target: 8,
+    };
+    console.log("handleSlideConfirm", selectedAccountId)
+    // dispatch(placeNewOrder(payload));
+
+    const response = await placeOrderStock(payload)
+    console.log(response)
+    if(response.stats === 'success'){
+       dispatch(
+      showToasty({
+        message: "Order placed successfully",
+        type: "success",
+        price: payload.price,
+        quantity: payload.qty,
+        status: "filled",
+      })
+    );
+    }
+   
+
+    // ✅ HIDE AFTER 2 SECONDS
+    // setTimeout(() => {
+    //   dispatch(hideToasty());
+    // }, 2000);
+
+    // or call API here
   };
 
-  console.log(" Order Confirmed Payload:", orderPayload);
+  const quentyChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    console.log("change triger", e.target.value)
+    let value = e.target.value;
 
-  //  Later you can do:
-  // dispatch(placeOrder(orderPayload))
-  // or call API here
-};
+  // remove leading zeros
+  value = value.replace(/^0+(?=\d)/, "");
+
+  if (value === "") {
+    setQuantity("");
+  } else {
+    setQuantity(Number(value));
+  }
+  }
 
 
 
@@ -68,7 +148,7 @@ const InstrumentOrderPlace = () => {
         handleSlideConfirm();   // 👈 CALL YOUR FUNCTION HERE
         cleanup();
         console.log("Order Confirmed");
-        
+
       }
     };
 
@@ -109,10 +189,9 @@ const InstrumentOrderPlace = () => {
               <span
                 className={`
                   w-[10px] h-[10px] rounded-full
-                  ${
-                    exchange === "NSE"
-                      ? "bg-main"
-                      : "border border-[#6B7C90]"
+                  ${exchange === "NSE"
+                    ? "bg-main"
+                    : "border border-[#6B7C90]"
                   }
                 `}
               />
@@ -132,10 +211,9 @@ const InstrumentOrderPlace = () => {
               <span
                 className={`
                   w-[10px] h-[10px] rounded-full
-                  ${
-                    exchange === "BSE"
-                      ? "bg-main"
-                      : "border border-[#6B7C90]"
+                  ${exchange === "BSE"
+                    ? "bg-main"
+                    : "border border-[#6B7C90]"
                   }
                 `}
               />
@@ -155,9 +233,7 @@ const InstrumentOrderPlace = () => {
                 <input
                   type="number"
                   value={quantity}
-                  onChange={(e) =>
-                    setQuantity(Number(e.target.value))
-                  }
+                  onChange={(e)=>quentyChange(e)}
                   className="flex-1 bg-transparent outline-none px-[12px] text-[16px] text-white"
                 />
 
@@ -218,11 +294,10 @@ const InstrumentOrderPlace = () => {
                   className="hidden"
                 />
                 <span
-                  className={`w-[10px] h-[10px] rounded-full ${
-                    value === "intraday"
-                      ? "bg-main"
-                      : "border border-[#6B7C90]"
-                  }`}
+                  className={`w-[10px] h-[10px] rounded-full ${value === "intraday"
+                    ? "bg-main"
+                    : "border border-[#6B7C90]"
+                    }`}
                 />
                 <span className="text-white text-[12px]">
                   Intraday
@@ -240,11 +315,10 @@ const InstrumentOrderPlace = () => {
                   className="hidden"
                 />
                 <span
-                  className={`w-[10px] h-[10px] rounded-full ${
-                    value === "longterm"
-                      ? "bg-main"
-                      : "border border-[#6B7C90]"
-                  }`}
+                  className={`w-[10px] h-[10px] rounded-full ${value === "longterm"
+                    ? "bg-main"
+                    : "border border-[#6B7C90]"
+                    }`}
                 />
                 <span className="text-white text-[12px]">
                   Longterm

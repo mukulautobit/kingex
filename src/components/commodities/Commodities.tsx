@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hook'
 import { fetchPositions } from '../../store/slices/positionsSlice'
 import {calculatePnL, formatEpochToTime} from "../../Utils/HelperFunction"
 import type { RootState } from '../../store/Store'
-import { fetchInstrumentsByCategory } from '../../store/slices/instrumentsSlice'
+import { fetchInstrumentsByCategory, setSelectedInstrument } from '../../store/slices/instrumentsSlice'
 import Card from '../card/Card'
 import { subscribeToInstruments } from '../../service/socketService'
 
@@ -76,7 +76,7 @@ useEffect(() => {
         //     value : "970272",
         //     name : "abcd"
         // }
-
+    dispatch(setSelectedInstrument(data.id));
         navigate("/instrumentDetails", {
             state : {
                 instrumentData : data
@@ -126,29 +126,29 @@ useEffect(() => {
 export default Commodities;
 
 
-/** <div className="flex flex-col">
-        {positions.map((pos) => {
-        const pnl = calculatePnL({
-         side: pos.side,              // "buy" | "sell"
-         entryPrice: pos.price,  // number
-         bid: pos.live_bid,                // current bid
-         ask: pos.live_ask,                // current ask
-         quantity: pos.qty,
-    });
+// <div className="flex flex-col">
+//         {positions.map((pos) => {
+//         const pnl = calculatePnL({
+//          side: pos.side,              // "buy" | "sell"
+//          entryPrice: pos.price,  // number
+//          bid: pos.live_bid,                // current bid
+//          ask: pos.live_ask,                // current ask
+//          quantity: pos.qty,
+//     });
 
-    return (
-      <div
-        key={pos.id}
-        onClick={() => handleCardClick(pos)}
-      >
-        <CommoditiesItem
-          tradeName={pos.trading_name}
-          exchange={"NSE"}
-          ltp={pos.price}
-          pnl={pnl}                 // ✅ FINAL VALUE PASSED
-          timestamp={pos.created_at}
-        />
-      </div>
-    );
-  })}
-</div>*/
+//     return (
+//       <div
+//         key={pos.id}
+//         onClick={() => handleCardClick(pos)}
+//       >
+//         <CommoditiesItem
+//           tradeName={pos.trading_name}
+//           exchange={"NSE"}
+//           ltp={pos.price}
+//           pnl={pnl}                 // ✅ FINAL VALUE PASSED
+//           timestamp={pos.created_at}
+//         />
+//       </div>
+//     );
+//   })}
+// </div>
