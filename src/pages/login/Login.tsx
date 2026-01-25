@@ -1,5 +1,8 @@
 import  {useState} from 'react'
 import kingexLogo  from "../../assets/icons/kingxlogo.svg"
+import { useNavigate } from "react-router-dom";
+import { sendOtp } from "../../service/api";
+
 
 
 // import { useNavigate } from "react-router-dom";
@@ -14,17 +17,32 @@ import kingexLogo  from "../../assets/icons/kingxlogo.svg"
 const Login = () => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
+    const navigate = useNavigate()
 
-  const handleContinue = () => {
-    if (phone.trim().length < 10) {
-      setError("Please Enter Correct Number");
-      alert("Plear Enter correct Number")
-      return;
-    }
 
-    setError("");
-    console.log("Send OTP to", phone);
-  };
+
+  const handleContinue = async () => {
+  if (phone.trim().length !== 10) {
+    setError("Please Enter Correct Number");
+    return;
+  }
+
+  setError("");
+
+  try {
+    const res = await sendOtp("+91", phone);
+    console.log("OTP SENT:", res);
+    
+
+    navigate("/optauthentication", {
+      state: { phone }
+    });
+
+  } catch (err) {
+    console.log(err);
+    alert("Failed to send OTP");
+  }
+};
 
   return (
     <div 

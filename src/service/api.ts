@@ -77,3 +77,51 @@ export const fetchHistory = async()=>{
 
 }
 
+// <--------------------------------MOBILE---------------------------->
+
+// export const verifyOtp = async (
+//   country_code: string,
+//   mobile_number: string,
+//   otp: string
+// ) => {
+//   const res = await fetch(`${BASE_URL}/account/otp/verify`, {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({
+//       country_code,
+//       mobile_number,
+//       otp
+//     })
+//   });
+
+//   return res.json();
+// }
+
+
+export const sendOtp = async (country_code: string, mobile_number: string) => {
+  const res = await fetch(`${BASE_URL}/account/otp/send`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ country_code, mobile_number })
+  });
+
+  return res.json();
+};
+
+export const verifyOtp = async (
+  country_code: string,
+  mobile_number: string,
+  otp: string
+) => {
+  const res = await fetch(`${BASE_URL}/account/otp/verify`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ country_code, mobile_number, otp })
+  });
+
+  return res.json();
+};
+
+
+
+

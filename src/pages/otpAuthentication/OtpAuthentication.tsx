@@ -1,14 +1,12 @@
-import  { useState } from "react";
-import otpIcon from "../../assets/icons/optImage.svg"
-import tickIcon from "../../assets/icons/loginTick.svg"
-import loderIcon from "../../assets/icons/loader.svg"
-// import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import otpIcon from "../../assets/icons/optImage.svg";
+import tickIcon from "../../assets/icons/loginTick.svg";
+import loderIcon from "../../assets/icons/loader.svg";
+import { useNavigate } from "react-router-dom";
 
+/* ---------------- SUCCESS SCREEN ---------------- */
 
-// type ScreenState = "otp" | "loading" | "success";
-
-
-const LoginSuccessfulPage = () => {
+const LoginSuccessfulPage = ({ onGoHome }: { onGoHome: () => void }) => {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center px-[20px] bg-blackprimary">
       <div className="flex flex-col items-center gap-[44px]">
@@ -29,6 +27,7 @@ const LoginSuccessfulPage = () => {
         </div>
 
         <button
+          onClick={onGoHome}
           className="w-[174px] h-[44px] bg-[#FACA46] rounded-[6px] text-[#0D0D0D]"
         >
           Go home
@@ -41,10 +40,15 @@ const LoginSuccessfulPage = () => {
 /* ---------------- OTP AUTH ---------------- */
 
 const OtpAuthentication = () => {
-  const [otp, setOtp] = useState(["", "", "", ""]);
+
+  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [screen, setScreen] = useState<
     "otp" | "loading" | "success"
   >("otp");
+
+  const navigate = useNavigate();
+
+  /* ---------- OTP INPUT ---------- */
 
   const handleChange = (value: string, index: number) => {
     if (!/^\d?$/.test(value)) return;
@@ -53,27 +57,39 @@ const OtpAuthentication = () => {
     newOtp[index] = value;
     setOtp(newOtp);
 
-    if (value && index < 3) {
+    if (value && index < 5) {
       document.getElementById(`otp-${index + 1}`)?.focus();
     }
   };
 
+  /* ---------- VERIFY ---------- */
+
   const handleVerify = () => {
-    if (otp.join("").length < 4) return;
+    const otpValue = otp.join("");
+
+    if (otpValue.length !== 6) return;
 
     setScreen("loading");
 
     setTimeout(() => {
-      setScreen("success");
+      if (otpValue === "222122") {
+        setScreen("success");
+      } else {
+        alert("Invalid OTP");
+        setScreen("otp");
+      }
     }, 1000);
   };
 
   /* ---------------- SUCCESS ---------------- */
+
   if (screen === "success") {
-    return <LoginSuccessfulPage />;
+    localStorage.setItem("ASSESS","Allow")
+    return <LoginSuccessfulPage onGoHome={() => navigate("/")} />;
   }
 
   /* ---------------- LOADER ---------------- */
+
   if (screen === "loading") {
     return (
       <div className="min-h-screen flex flex-col justify-center items-center bg-blackprimary">
@@ -89,6 +105,7 @@ const OtpAuthentication = () => {
   }
 
   /* ---------------- OTP SCREEN ---------------- */
+
   return (
     <div
       className="
@@ -107,6 +124,7 @@ const OtpAuthentication = () => {
 
       {/* OTP INPUTS */}
       <div className="flex flex-col items-center gap-[20px]">
+
         <div className="flex gap-[13px]">
           {otp.map((digit, index) => (
             <input
@@ -151,6 +169,7 @@ const OtpAuthentication = () => {
         >
           Verify
         </button>
+
       </div>
     </div>
   );
