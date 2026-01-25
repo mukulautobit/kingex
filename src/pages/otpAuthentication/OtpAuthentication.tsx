@@ -2,7 +2,8 @@ import { useState } from "react";
 import otpIcon from "../../assets/icons/optImage.svg";
 import tickIcon from "../../assets/icons/loginTick.svg";
 import loderIcon from "../../assets/icons/loader.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { verifyOtp } from "../../service/api";
 
 /* ---------------- SUCCESS SCREEN ---------------- */
 
@@ -64,22 +65,29 @@ const OtpAuthentication = () => {
 
   /* ---------- VERIFY ---------- */
 
-  const handleVerify = () => {
-    const otpValue = otp.join("");
+  const location = useLocation();
+const phone = location.state?.phone;
+console.log(phone)
 
-    if (otpValue.length !== 6) return;
+ const handleVerify = async () => {
+  const otpValue = otp.join("");
 
-    setScreen("loading");
+  if (otpValue.length !== 6) return;
 
-    setTimeout(() => {
-      if (otpValue === "222122") {
-        setScreen("success");
-      } else {
-        alert("Invalid OTP");
-        setScreen("otp");
-      }
-    }, 1000);
-  };
+  setScreen("loading");
+
+  try {
+    const res = await verifyOtp("+91", phone, otpValue);
+    console.log("VERIFY RESPONSE:", res);
+
+    // assume success if API returns ok
+    setScreen("success");
+  } catch (err) {
+    console.log(err);
+    alert("Invalid OTP");
+    setScreen("otp");
+  }
+};
 
   /* ---------------- SUCCESS ---------------- */
 

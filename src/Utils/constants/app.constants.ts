@@ -5,11 +5,11 @@
 // export const WEBSOCKET_EVENT_URL =  "wss://event-swastiik.fintrabit.com/event"; 
 
 
-export const WEBSOCKET_API_URL ="ws://192.46.213.87:5858/ws"
+export const WEBSOCKET_API_URL ="ws://api-test.swtik.com/ws"
 
-export const WEBSOCKET_STREAM_URL = "ws://192.46.213.87:6868/stream"
+export const WEBSOCKET_STREAM_URL = "ws://api-test.swtik.com/stream"
 
-export const WEBSOCKET_EVENT_URL =  "ws://192.46.213.87:9898/event"; 
+export const WEBSOCKET_EVENT_URL =  "ws://api-test.swtik.com/event";
 
 export const BASE_URL = "https://api-test.swtik.com"
 
