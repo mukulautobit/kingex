@@ -13,7 +13,7 @@ import { subscribeToInstruments } from '../../service/socketService'
 
 
 
-const Commodities = ({icon, label = "stock"}:CommoditiesHeaderProps) => {
+const Commodities = ({ icon, label = "stock", search }: CommoditiesHeaderProps & { search: string }) => {
 
   const dispatch = useAppDispatch();
   const [subscribedIds, setSubscribedIds] = useState<string[]>([]);
@@ -25,8 +25,13 @@ const Commodities = ({icon, label = "stock"}:CommoditiesHeaderProps) => {
 
     const instruments = data[label.toLowerCase()] || [];
 
-  let filteredInstruments = [...instruments];
+    console.log(search)
 
+ let filteredInstruments = instruments.filter((instrument) =>
+  instrument.name
+    .toLowerCase()
+    .includes(search.toLowerCase())
+);
   
 
   const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 // import SearchHeader from '../../components/searchHeader/SearchHeader'
 import InfoHeader from '../../components/infoheader/InfoHeader'
 import MarketOptionsOffers from '../../components/marketOptions/MarketOptionsOffers'
@@ -17,29 +17,31 @@ import { fetchAccounts } from '../../store/slices/accountSlice'
 
 const Dashboard = () => {
 
+  const [search, setSearch] = useState("");
+
   const { data } = useAppSelector(state => state.categories);
   const apiStatus = useAppSelector(state => state.websockets.apiStatus);
   const dispatch = useAppDispatch()
   const [categories, setCategories] = useState<string[]>([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(fetchAccounts())
     console.log("FETCH ACCOUNTS")
-  },[])
+  }, [])
 
   // console.log(data)
-  useEffect(()=>{
-    if(apiStatus==='connected'){
+  useEffect(() => {
+    if (apiStatus === 'connected') {
       dispatch(fetchCategories())
     }
 
-  },[apiStatus,dispatch])
+  }, [apiStatus, dispatch])
 
-  useEffect(()=>{
-    const reqCategories = data.filter((cat)=> cat ==='stock')
+  useEffect(() => {
+    const reqCategories = data.filter((cat) => cat === 'stock')
     // console.log(reqCategories)
     setCategories(reqCategories)
-  },[data])
+  }, [data])
 
   return (
     <>
@@ -47,13 +49,15 @@ const Dashboard = () => {
       <HeaderBar
         showSearch
         rightIcons={<img src={searchIcon} className="w-[15px] h-[15px]" />}
+        placeholder="Search"
+        onSearchChange={(value) => setSearch(value)}
       />
       <InfoHeader />
       <MarketOptionsOffers />
       {
-        categories?.map((cat)=>(
-          
-          <Commodities icon={stocksIcon} label={cat.toUpperCase()} />
+        categories?.map((cat) => (
+
+          <Commodities icon={stocksIcon} label={cat.toUpperCase()} search={search} />
         ))
       }
       {/* <Commodities icon={trendingCommodities} label='Trending Stocks' /> */}
