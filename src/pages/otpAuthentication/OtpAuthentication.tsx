@@ -1,5 +1,5 @@
 import { useState } from "react";
-import otpIcon from "../../assets/icons/optImage.svg";
+import otpIcon from "../../assets/icons/otpIcononly.svg";
 import tickIcon from "../../assets/icons/loginTick.svg";
 import loderIcon from "../../assets/icons/loader.svg";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -133,9 +133,29 @@ console.log(phone)
       "
     >
       {/* ICON */}
-      <div className="flex flex-col items-center gap-[22px]">
-        <img src={otpIcon} className="w-[256px] h-[256px]" />
-      </div>
+     <div className="flex flex-col items-center gap-[22px] relative">
+  <img src={otpIcon} className="w-[256px] h-[256px]" />
+
+  <h1 className="text-main absolute top-[150px]">
+    Enter One Time Password
+  </h1>
+
+  <p
+    className="
+      text-grayprimary
+      absolute top-[175px]
+      font-poppins
+      font-normal
+      text-[12px]
+      leading-[12px]
+      tracking-[0]
+      text-center
+    "
+  >
+    One time password is sent to your Registered Phone Number
+  </p>
+</div>
+
 
       {/* OTP INPUTS */}
       <div className="flex flex-col items-center gap-[20px]">
