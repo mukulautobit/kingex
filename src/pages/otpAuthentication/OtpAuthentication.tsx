@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import otpIcon from "../../assets/icons/otpIcononly.svg";
 import tickIcon from "../../assets/icons/loginTick.svg";
 import loderIcon from "../../assets/icons/loader.svg";
@@ -48,6 +48,7 @@ const OtpAuthentication = () => {
   const [screen, setScreen] = useState<
     "otp" | "loading" | "success"
   >("otp");
+  const tokenRef = useRef<string>("")
 
   const navigate = useNavigate();
 
@@ -83,8 +84,8 @@ console.log(phone)
     console.log("VERIFY RESPONSE:", res);
 
     // assume success if API returns ok
-    setScreen("success");
     if(res.status === 'success'){
+      setScreen("success");
       localStorage.setItem("token", res?.data.token)
       
     }
