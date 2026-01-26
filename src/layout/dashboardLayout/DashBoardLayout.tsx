@@ -13,10 +13,14 @@ const DashBoardLayout = () => {
     initializeSockets(store)
   },[])
   return (
-     <div className="h-full relative">
-      
+     <div className="h-screen flex flex-col relative overflow-hidden">
+
       {/* Pages */}
-      <Outlet />
+      <div className="flex-1 overflow-y-auto"
+      style={{scrollbarWidth:"none"}}
+      >
+        <Outlet />
+      </div>
 
       {/* Global Toast */}
       <Toasty />
