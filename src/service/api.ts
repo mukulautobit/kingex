@@ -99,12 +99,19 @@ export const fetchHistory = async()=>{
 
 
 export const sendOtp = async (country_code: string, mobile_number: string) => {
+  console.log("send request")
   const res = await fetch(`${BASE_URL}/account/otp/send`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ country_code, mobile_number })
   });
 
+  console.log("after response")
+   if (!res.ok) {
+    const text = await res.text(); // read HTML / error
+    console.error("API Error:", res.status, text);
+    throw new Error(`OTP API failed: ${res.status}`);
+  }
   return res.json();
 };
 

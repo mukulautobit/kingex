@@ -1,5 +1,9 @@
 // import React from 'react'
-import stocksIcon from "../../assets/icons/trendingStocks.svg"
+// import stocksIcon from "../../assets/icons/trendingStocks.svg"
+import cash from "../../assets/icons/cash.svg"
+import fno from "../../assets/icons/fno.svg"
+import stock from "../../assets/icons/stocks.svg"
+import mcx from "../../assets/icons/mcx.svg"
 
 const MarketOptionsOffers = () => {
  return (
@@ -23,7 +27,7 @@ const MarketOptionsOffers = () => {
       >
         {/* Cash */}
         <div className="flex flex-col items-center gap-[12px] w-[51px] h-[63px]">
-          <img src={stocksIcon} className="w-[33px] h-[33px] rounded-full bg-grayprimary" />
+          <img src={cash} className="w-[33px] h-[33px] " />
           <span
             className="
               font-poppins font-[275]
@@ -38,7 +42,7 @@ const MarketOptionsOffers = () => {
 
         {/* F&O */}
         <div className="flex flex-col items-center gap-[12px] w-[51px] h-[63px]">
-          <img src={stocksIcon} className="w-[33px] h-[33px] rounded-full bg-grayprimary" />
+          <img src={fno} className="w-[33px] h-[33px] " />
           <span
             className="
               font-poppins font-[275]
@@ -53,7 +57,7 @@ const MarketOptionsOffers = () => {
 
         {/* Stocks */}
         <div className="flex flex-col items-center gap-[12px] w-[51px] h-[63px]">
-          <img src={stocksIcon} className="w-[33px] h-[33px] rounded-full bg-grayprimary" />
+          <img src={stock} className="w-[33px] h-[33px] " />
           <span
             className="
               font-poppins font-[275]
@@ -68,7 +72,7 @@ const MarketOptionsOffers = () => {
 
         {/* MCX */}
         <div className="flex flex-col items-center gap-[12px] w-[51px] h-[63px]">
-          <img src={stocksIcon} className="w-[33px] h-[33px] rounded-full bg-grayprimary" />
+          <img src={mcx} className="w-[33px] h-[33px] " />
           <span
             className="
               font-poppins font-[275]

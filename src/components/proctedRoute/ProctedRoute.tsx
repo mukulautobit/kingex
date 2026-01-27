@@ -8,17 +8,17 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-//   const token = localStorage.getItem("token"); // or sessionStorage
-    let token = false;
-    const access = localStorage.getItem("ASSESS")
-    if(access ==="Allow") {
+  const token = localStorage.getItem("token"); // or sessionStorage
+    // let token = true;
+    // const access = localStorage.getItem("ASSESS")
+    // if(access ==="Allow") {
 
-      token = true
-      //     if(localStorage.getItem("ASSESS")){
-      //  initializeSockets(store)
-      // console.log("initilizaSpocket")
+    //   token = true
+    //   //     if(localStorage.getItem("ASSESS")){
+    //   //  initializeSockets(store)
+    //   // console.log("initilizaSpocket")
 
-    }
+    // }
 
   if (!token) {
     return <Navigate to="/login" replace />;

@@ -101,7 +101,7 @@ const Card = ({
 
   return (
     <div
-      className={`bg-blackprimary border-grayprimary 
+      className={`bg-blackprimary border-blacksecondary 
         px-5 py-2.5 border-b`}
       onClick={onClick}
     >

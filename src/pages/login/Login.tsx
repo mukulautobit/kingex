@@ -23,6 +23,7 @@ const Login = () => {
 
   const handleContinue = async () => {
   if (phone.trim().length !== 10) {
+    console.log(phone)
     setError("Please Enter Correct Number");
     return;
   }
@@ -30,6 +31,7 @@ const Login = () => {
   setError("");
 
   try {
+    console.log("before send")
     const res = await sendOtp("+91", phone);
     console.log("OTP SENT:", res);
     

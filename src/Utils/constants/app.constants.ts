@@ -7,9 +7,11 @@
 
 export const WEBSOCKET_API_URL ="ws://api-test.swtik.com/ws"
 
-export const WEBSOCKET_STREAM_URL = "ws://api-test.swtik.com/stream"
+// export const WEBSOCKET_STREAM_URL = "ws://api-test.swtik.com/stream"
+export const WEBSOCKET_STREAM_URL = "ws://192.46.213.87:6868/stream"
 
-export const WEBSOCKET_EVENT_URL =  "ws://api-test.swtik.com/event";
+export const WEBSOCKET_EVENT_URL =  "ws://192.46.213.87:6868/event";
+// export const WEBSOCKET_EVENT_URL =  "ws://api-test.swtik.com/event";
 
 export const BASE_URL = "https://api-test.swtik.com"
 

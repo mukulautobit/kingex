@@ -92,15 +92,16 @@ useEffect(() => {
    <div
       className="
         w-full
-        px-[20px] pt-[10px] pb-[20px] h-full
-        border-t border-blacksecondary
-        flex flex-col gap-[10px] overflow-hidden
+    px-[20px] pt-[10px] pb-[40px]
+    border-t border-blacksecondary
+    flex flex-col gap-[10px]
+    overflow-y-auto
       "
     >
      <CommoditiesHeader icon={icon} label={label}/>
 
        {/* ---------- ITEMS ---------- */}
-
+      <div className='pb-20'>
       {
         filteredInstruments.map((instrument) => (
             <Card
@@ -121,7 +122,7 @@ useEffect(() => {
             />
           ))
       }
-
+    </div>
      {/*  */}
 
     </div>

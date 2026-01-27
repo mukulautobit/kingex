@@ -1,4 +1,4 @@
-// import React from "react";
+import { useEffect, useRef } from "react";
 
 interface CommoditiesItemProps {
   tradeName: string;
@@ -23,7 +23,22 @@ const CommoditiesItem = ({
   pnl,
   timestamp,
 }: CommoditiesItemProps) => {
-  const isProfit = pnl >= 0;
+
+  // store previous pnl
+  const prevPnlRef = useRef<number | null>(null);
+
+  // determine pnl direction
+  let pnlState: "up" | "down" | "same" = "same";
+
+  if (prevPnlRef.current !== null) {
+    if (pnl > prevPnlRef.current) pnlState = "up";
+    else if (pnl < prevPnlRef.current) pnlState = "down";
+  }
+
+  // update previous pnl AFTER render
+  useEffect(() => {
+    prevPnlRef.current = pnl;
+  }, [pnl]);
 
   return (
     <div className="flex items-center justify-between py-[10px] border-b border-[#181818]">
@@ -43,19 +58,27 @@ const CommoditiesItem = ({
       <div className="flex flex-col items-end gap-[2px]">
         <span
           className={`text-[14px] font-medium ${
-            isProfit ? "text-[#00B306]" : "text-[#FF3B30]"
+            pnlState === "up"
+              ? "text-[#00B306]"
+              : pnlState === "down"
+              ? "text-[#FF3B30]"
+              : "text-white"
           }`}
         >
-           {(ltp ?? 0).toLocaleString()}
+          {ltp.toLocaleString()}
         </span>
 
         <span
           className={`text-[11px] font-light ${
-            isProfit ? "text-[#00B306]" : "text-[#FF3B30]"
+            pnlState === "up"
+              ? "text-[#00B306]"
+              : pnlState === "down"
+              ? "text-[#FF3B30]"
+              : "text-[#8E8E8E]"
           }`}
         >
           {pnl > 0 ? "+" : ""}
-           {(pnl ?? 0).toFixed(2)}
+          {pnl.toFixed(2)}
         </span>
       </div>
     </div>
