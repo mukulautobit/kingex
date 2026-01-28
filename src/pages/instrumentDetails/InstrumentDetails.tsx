@@ -1,8 +1,9 @@
-import  { useState } from "react";
+import { useState } from "react";
 import TrendingListHeader from "../../components/tradingListHeader/TrendingListHeader";
 import { useLocation, useNavigate } from "react-router-dom";
 import BuySellProgress from "../../components/progressBar/BuySellProgress";
 import { calculateBuySellPercent } from "../../Utils/HelperFunction";
+import Button from "../../components/button/Button";
 
 /* ------------------ TABS ------------------ */
 const tabs = [
@@ -132,6 +133,31 @@ const InstrumentDetails = () => {
             buyQty={bidQty.toString()}
             sellQty={askQty.toString()}
           />
+          <div className="sticky bottom-0 w-full bg-blackprimary px-4 py-3 border-t border-[rgba(100,100,100,0.25)]">
+            <div className="flex gap-4">
+              <Button
+                label="Buy"
+                variant="buy"
+                className="flex-1"
+                onClick={() =>
+                  navigate("/InstrumentOrderPlace", {
+                    state: { instrumentData, side: "buy" },
+                  })
+                }
+              />
+
+              <Button
+                label="Sell"
+                variant="sell"
+                className="flex-1"
+                onClick={() =>
+                  navigate("/InstrumentOrderPlace", {
+                    state: { instrumentData, side: "sell" },
+                  })
+                }
+              />
+            </div>
+          </div>
         </>
       ),
     },
@@ -208,14 +234,12 @@ const InstrumentDetails = () => {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`${tab.width} h-11 px-2.5 flex items-center justify-center ${
-                isActive ? "border-b-2 border-grayprimary" : ""
-              }`}
+              className={`${tab.width} h-11 px-2.5 flex items-center justify-center ${isActive ? "border-b-2 border-grayprimary" : ""
+                }`}
             >
               <span
-                className={`text-xs text-grayprimary ${
-                  isActive ? "font-medium" : "font-light"
-                }`}
+                className={`text-xs text-grayprimary ${isActive ? "font-medium" : "font-light"
+                  }`}
               >
                 {tab.label}
               </span>

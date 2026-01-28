@@ -8,7 +8,7 @@ import searchIcon from "../../assets/icons/searchIcon.svg"
 import HeaderBar from '../../components/searchHeader/HeaderBar'
 import { useAppDispatch, useAppSelector } from '../../store/hook'
 import { fetchCategories } from '../../store/slices/categoriesSlice'
-import stocksIcon from "../../assets/icons/trendingStocks.svg"
+import stocksIcon from "../../assets/icons/tradingstocks.svg"
 import { fetchAccounts } from '../../store/slices/accountSlice'
 
 // import trendingStocks from "../../assets/icons/trendingStocks.svg"
