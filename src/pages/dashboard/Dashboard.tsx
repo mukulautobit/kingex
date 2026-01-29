@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hook'
 import { fetchCategories } from '../../store/slices/categoriesSlice'
 import stocksIcon from "../../assets/icons/tradingstocks.svg"
 import { fetchAccounts } from '../../store/slices/accountSlice'
+import { showToasty } from '../../store/slices/notificationSlice'
 
 // import trendingStocks from "../../assets/icons/trendingStocks.svg"
 // import BottomBar from '../../components/bottomBar/BottomBar'
@@ -23,6 +24,12 @@ const Dashboard = () => {
   const apiStatus = useAppSelector(state => state.websockets.apiStatus);
   const dispatch = useAppDispatch()
   const [categories, setCategories] = useState<string[]>([]);
+
+  // dispatch(
+  //           showToasty({
+  //           type: "success",
+  //           message: "Login successfully"
+  //         }))
 
   useEffect(() => {
     dispatch(fetchAccounts())

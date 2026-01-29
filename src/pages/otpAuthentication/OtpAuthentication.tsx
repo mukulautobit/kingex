@@ -4,6 +4,8 @@ import tickIcon from "../../assets/icons/loginTick.svg";
 import loderIcon from "../../assets/icons/loader.svg";
 import { useNavigate, useLocation } from "react-router-dom";
 import { verifyOtp } from "../../service/api";
+import { showToasty } from "../../store/slices/notificationSlice";
+import { useAppDispatch } from "../../store/hook";
 // import { initializeSockets } from "../../service/socketService";
 // import { store } from "../../store/Store";
 
@@ -51,6 +53,7 @@ const OtpAuthentication = () => {
   const tokenRef = useRef<string>("")
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch()
 
   /* ---------- OTP INPUT ---------- */
 
@@ -87,7 +90,13 @@ console.log(phone)
     if(res.status === 'success'){
       setScreen("success");
       localStorage.setItem("token", res?.data.token)
-      
+      dispatch(
+    showToasty({
+    type: "success",
+    message: "Login successfully"
+  })
+);
+
     }
     // initializeSockets(store)
   } catch (err) {

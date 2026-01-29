@@ -2,6 +2,8 @@ import  {useState} from 'react'
 import kingexLogo  from "../../assets/icons/kingxlogo.svg"
 import { useNavigate } from "react-router-dom";
 import { sendOtp } from "../../service/api";
+import { showToasty } from '../../store/slices/notificationSlice';
+import { useAppDispatch } from '../../store/hook';
 
 
 
@@ -20,7 +22,7 @@ const Login = () => {
     const navigate = useNavigate()
 
 
-
+  const dispatch = useAppDispatch()
   const handleContinue = async () => {
   if (phone.trim().length !== 10) {
     console.log(phone)
@@ -35,6 +37,14 @@ const Login = () => {
     const res = await sendOtp("+91", phone);
     console.log("OTP SENT:", res);
     
+    if(res.status ==="success"){
+
+      dispatch(
+          showToasty({
+          type: "success",
+          message: "Login successfully"
+        }))
+    }
 
     navigate("/optauthentication", {
       state: { phone }

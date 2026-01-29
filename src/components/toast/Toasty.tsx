@@ -40,7 +40,7 @@ const Toasty = () => {
   const isError =
     data.type === "error" || data.status?.toLowerCase() === "failed";
 
-    console.log(isError)
+  console.log(isError)
 
   // const getClassName = () => {
   //   let classes = "toasty-pill";
@@ -82,6 +82,11 @@ const Toasty = () => {
     shadow-[0_4px_15px_rgba(0,0,0,0.3)]
     flex items-center justify-center
     pointer-events-auto
+    text-white
+
+    ${isSuccess && "bg-main"}
+    ${isError && "bg-red-600"}
+    ${!isSuccess && !isError && "bg-[#2A2A2A]"}
 
     ${isExiting
             ? "animate-[slideOutUp_0.3s_ease-in_forwards]"
@@ -89,6 +94,7 @@ const Toasty = () => {
           }
   `}
       >
+
         {getDisplayText()}
       </div>
 

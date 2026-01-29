@@ -33,7 +33,7 @@ const MarketOptionsOffers = () => {
               font-poppins font-[275]
               text-[12px] leading-[18px]
               text-center
-              text-grayprimary
+              text-main
             "
           >
             Cash
@@ -48,7 +48,7 @@ const MarketOptionsOffers = () => {
               font-poppins font-[275]
               text-[12px] leading-[18px]
               text-center
-              text-grayprimary
+              text-main
             "
           >
             F&amp;O
@@ -63,7 +63,7 @@ const MarketOptionsOffers = () => {
               font-poppins font-[275]
               text-[12px] leading-[18px]
               text-center
-              text-[#D9D9D9]
+              text-main
             "
           >
             Stocks
@@ -78,7 +78,7 @@ const MarketOptionsOffers = () => {
               font-poppins font-[275]
               text-[12px] leading-[18px]
               text-center
-              text-grayprimary
+              text-main
             "
           >
             MCX
