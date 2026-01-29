@@ -26,6 +26,7 @@ const Commodities = ({ icon, label = "stock", search }: CommoditiesHeaderProps &
     const instruments = data[label.toLowerCase()] || [];
 
     console.log(search)
+    // console.log(instruments)
 
  let filteredInstruments = instruments.filter((instrument) =>
   instrument.name
@@ -36,7 +37,7 @@ const Commodities = ({ icon, label = "stock", search }: CommoditiesHeaderProps &
 
   const navigate = useNavigate();
 
-  console.log(data, error, status)
+  // console.log(data, error, status)
 
   // useEffect(()=>{
   //   console.log(positions)
@@ -107,15 +108,15 @@ useEffect(() => {
             <Card
               key={instrument.id}
               code={instrument.name}
-              bid={instrument.dinamic_data.quotes.bid?.[0] ?? 0}
-              ask={instrument.dinamic_data.quotes.ask[0] ?? 0}
-              ltp={instrument.dinamic_data.quotes.ltp[0] ?? 0}
-              high={instrument.dinamic_data.quotes.h[0] ?? 0}
-              low={instrument.dinamic_data.quotes.l[0] ?? 0}
-              close={instrument.dinamic_data.quotes.c[0] ?? 0}
-              pip={instrument.static_data.ticksize}
-              timestamp={instrument.overnight_margin_time}
-              cardIcon={instrument.icon}
+              bid={instrument?.dinamic_data.quotes?.bid?.[0] ?? 0}
+              ask={instrument?.dinamic_data.quotes?.ask[0] ?? 0}
+              ltp={instrument.dinamic_data.quotes?.ltp[0] ?? 0}
+              high={instrument.dinamic_data.quotes?.h[0] ?? 0}
+              low={instrument.dinamic_data.quotes?.l[0] ?? 0}
+              close={instrument.dinamic_data.quotes?.c[0] ?? 0}
+              pip={instrument?.static_data?.ticksize}
+              timestamp={instrument?.overnight_margin_time}
+              cardIcon={instrument?.icon}
               onClick={() => handleCardClick(instrument)}
               active="forex"
               favourites={true}

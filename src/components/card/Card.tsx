@@ -40,11 +40,11 @@ const Card = ({
   active,
   // favourites,
 }: CardProps) => {
-  const askPrice = formatPrice(ask, pip);
-  const bidPrice = formatPrice(bid, pip);
+  // const askPrice = formatPrice(ask, pip);
+  // const bidPrice = formatPrice(bid, pip);
 
 
-  console.log(askPrice, bidPrice)
+  // console.log(askPrice, bidPrice)
   // 🌈 Dynamic colors
   const [askColor, setAskColor] = useState("text-white");
   const [bidColor, setBidColor] = useState("text-white");
@@ -71,7 +71,7 @@ const Card = ({
     // if equal → keep previous color
   }, [ask, prevAsk]);
 
-  console.log(active)
+  // console.log(active)
   //  BID COLOR LOGIC (FIXED)
   useEffect(() => {
     if (prevBid == null) return;

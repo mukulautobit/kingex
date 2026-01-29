@@ -9,7 +9,7 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const token = localStorage.getItem("token"); // or sessionStorage
-    // let token = true;
+    // let token = false;
     // const access = localStorage.getItem("ASSESS")
     // if(access ==="Allow") {
 
