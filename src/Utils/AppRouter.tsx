@@ -73,7 +73,7 @@ export const AppRouter = createBrowserRouter([
     ),
   },
   {
-    path: "/InstrumentOrderPlace",
+    path: "/InstrumentOrderPlace/",
     element: (
       <ProtectedRoute>
         <InstrumentOrderPlace />

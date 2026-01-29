@@ -65,7 +65,7 @@ const CommoditiesItem = ({
               : "text-white"
           }`}
         >
-          {ltp.toLocaleString()}
+          {typeof ltp === "number" ? ltp.toLocaleString() : "--"}
         </span>
 
         <span

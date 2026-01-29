@@ -25,17 +25,17 @@ const variants: Record<ButtonVariant, string> = {
   buy: `
     bg-[#00B306]
     text-white
-    shadow-[0px_0px_10px_#008508]
+    
   `,
   sell: `
     bg-[#C50000]
     text-white
-    shadow-[0px_0px_10px_#7a0000]
+    
   `,
   logout: `
     bg-[#FFD35A]
     text-black
-    shadow-[0px_0px_10px_#c9a300]
+    
     w-full
   `,
 };

@@ -25,7 +25,7 @@ const Commodities = ({ icon, label = "stock", search }: CommoditiesHeaderProps &
 
     const instruments = data[label.toLowerCase()] || [];
 
-    console.log(search)
+    // console.log(search)
     // console.log(instruments)
 
  let filteredInstruments = instruments.filter((instrument) =>
@@ -59,7 +59,7 @@ useEffect(() => {
     return;
   }
 
-  console.log("✅ Stream connected, subscribing to instruments");
+  // console.log("✅ Stream connected, subscribing to instruments");
   
   // Filter IDs that aren't already subscribed
   const idsToSubscribe = instruments
@@ -78,10 +78,6 @@ useEffect(() => {
 
 
    const handleCardClick = (data:any)=>{
-        // const data = {
-        //     value : "970272",
-        //     name : "abcd"
-        // }
     dispatch(setSelectedInstrument(data.id));
         navigate("/instrumentDetails", {
             state : {

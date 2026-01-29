@@ -7,13 +7,13 @@ import { fetchHistory } from '../../service/api';
 
 type TabId = "regular" | "mcx";
 
-export const tabs: { id: TabId; label: string; width: string }[] = [
+ const tabs: { id: TabId; label: string; width: string }[] = [
   { id: "regular", label: "Regular", width: "w-[70px]" },
   { id: "mcx", label: "MCX", width: "w-[52px]" },
 ];
 
 
-export const historyRegularData = [
+ const historyRegularData = [
   {
     id: 1,
     symbol: "EURUSD",
@@ -67,7 +67,7 @@ const History = () => {
       <div className="bg-blackprimary h-screen">
 
       {/* ---------- TABS ---------- */}
-      <div className="w-full md:max-w-[412px] h-[44px] px-[20px] flex gap-[10px] border-b border-[#181818]">
+      <div className="w-full md:max-w-[412px] h-[44px] px-[20px] flex gap-[10px] border-b border-blacksecondary">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
 
@@ -76,11 +76,11 @@ const History = () => {
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`${tab.width} h-[44px] px-[10px] flex items-center justify-center ${
-                isActive ? "border-b-2 border-[#D9D9D9]" : ""
+                isActive ? "border-b-2 border-grayprimary" : ""
               }`}
             >
               <span
-                className={`text-[12px] text-[#D9D9D9] ${
+                className={`text-[12px] text-grayprimary ${
                   isActive ? "font-medium" : "font-light"
                 }`}
               >

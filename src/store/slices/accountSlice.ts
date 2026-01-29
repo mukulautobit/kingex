@@ -5,7 +5,6 @@ import { hideLoader, showLoader } from "./loadingSlice";
 import { parseErrorMessage } from "../../Utils/errorUtils";
 
 // --- Interfaces ---
-// --- Interfaces ---
 export interface VariableDefinitionValue {
   name: string;
   type: string;
@@ -69,57 +68,102 @@ const initialState: AccountsState = {
 
 // --- Async Thunks ---
 
+// export const fetchAccounts = createAsyncThunk(
+//   "accounts/fetchAll",
+//   async (_, { dispatch, rejectWithValue }) => {
+//     try {
+//       dispatch(showLoader());
+//       console.log("Waiting for WebSocket connection...");  // Added for consistency
+      
+//       // Wait for connection before sending (added from categoriesSlice logic)
+//       return await new Promise<Account[]>((resolve, reject) => {
+//         apiClient.onConnected(async () => {
+//           try {
+//             console.log("✅ WebSocket connected, fetching accounts...");
+            
+//             const [accountsRes, variablesRes] = await Promise.all([
+//               apiClient.send<Account[]>("query", {
+//                 query: "fintrabit.accounts",
+//               }),
+//               apiClient.send<any[]>("query", {
+//                 query: "fintrabit.accounts{variables_definitions}",
+//               }),
+//             ]);
+
+//             if (accountsRes.status === "success") {
+//               const accounts = accountsRes.data || [];
+//               const variablesData = variablesRes.data || [];
+
+//               // Merge variables_definitions into accounts
+//               const mergedAccounts = accounts.map((account, index) => {
+//                 // Attempt to find matching variables block
+//                 // Strategy 1: Find by account_id inside the variables definitions
+//                 let matchingVars = variablesData.find((vItem) =>
+//                   vItem.variables_definitions?.some(
+//                     (def: VariableDefinition) => def.account_id === account.id
+//                   )
+//                 );
+
+                
+//                 if (!matchingVars && variablesData.length === accounts.length) {
+//                     matchingVars = variablesData[index];
+//                 }
+
+//                 return {
+//                   ...account,
+//                   variables_definitions: matchingVars?.variables_definitions || [],
+//                 };
+//               });
+
+//               resolve(mergedAccounts);  // Resolve with data
+//             } else {
+//               reject(accountsRes.message || "Failed to fetch accounts");
+//             }
+//           } catch (error: any) {
+//             console.error("Accounts fetch error:", error);
+//             const errorMessage = (error as { message?: string }).message || "An unknown error occurred";
+//             reject(errorMessage);
+//           }
+//         });
+//       });
+//     } catch (error) {
+//       return rejectWithValue(parseErrorMessage(error));
+//     } finally {
+//       dispatch(hideLoader());
+//     }
+//   }
+// );
 export const fetchAccounts = createAsyncThunk(
   "accounts/fetchAll",
   async (_, { dispatch, rejectWithValue }) => {
     try {
       dispatch(showLoader());
-      if (!apiClient) {
-        return rejectWithValue("WebSocket not connected");
-      }
-      const [accountsRes, variablesRes] = await Promise.all([
-        apiClient.send<Account[]>("query", {
-          query: "fintrabit.accounts",
-        }),
-        apiClient.send<any[]>("query", {
-          query: "fintrabit.accounts{variables_definitions}",
-        }),
-      ]);
+      console.log("Waiting for WebSocket connection...");
 
-      if (accountsRes.status === "success") {
-        const accounts = accountsRes.data || [];
-        const variablesData = variablesRes.data || [];
+      // Wait for connection before sending
+      return await new Promise<Account[]>((resolve, reject) => {
+        apiClient.onConnected(async () => {
+          try {
+            console.log("✅ WebSocket connected, fetching accounts...");
 
-        // Merge variables_definitions into accounts
-        const mergedAccounts = accounts.map((account, index) => {
-          // Attempt to find matching variables block
-          // Strategy 1: Find by account_id inside the variables definitions
-          let matchingVars = variablesData.find((vItem) =>
-            vItem.variables_definitions?.some(
-              (def: VariableDefinition) => def.account_id === account.id
-            )
-          );
+            const accountsRes = await apiClient.send<Account[]>("query", {
+              query: "fintrabit.accounts",
+            });
 
-          // Strategy 2: If not found (or empty definitions), fallback to index mapping if lengths match
-          // Note: Index mapping is risky if sorting differs, but frequent in some GQL-like setups.
-          // Using strict ID match is safer. If no vars found, it remains undefined/empty.
-          if (!matchingVars && variablesData.length === accounts.length) {
-              matchingVars = variablesData[index];
+            if (accountsRes.status === "success") {
+              const accounts = accountsRes.data || [];
+              resolve(accounts);  // Resolve with accounts data only
+            } else {
+              reject(accountsRes.message || "Failed to fetch accounts");
+            }
+          } catch (error: any) {
+            console.error("Accounts fetch error:", error);
+            const errorMessage = (error as { message?: string }).message || "An unknown error occurred";
+            reject(errorMessage);
           }
-
-          return {
-            ...account,
-            variables_definitions: matchingVars?.variables_definitions || [],
-          };
         });
-
-        return mergedAccounts;
-      }
-
-      return rejectWithValue(
-        parseErrorMessage(accountsRes.message || "Failed to fetch accounts")
-      );
-    } catch (error: any) {
+      });
+    } catch (error) {
       return rejectWithValue(parseErrorMessage(error));
     } finally {
       dispatch(hideLoader());

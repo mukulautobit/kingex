@@ -57,9 +57,10 @@ const InstrumentDetails = () => {
     calculateBuySellPercent(bid, ask);
 
   const handleSummaryClick = () => {
-    navigate("/InstrumentOrderPlace", {
-      state: { instrumentData },
-    });
+    // navigate("/InstrumentOrderPlace", {
+    //   state: { instrumentData },
+    // });
+    console.log("handle click")
   };
 
   /* ------------------ TAB CONTENT ------------------ */
@@ -133,31 +134,6 @@ const InstrumentDetails = () => {
             buyQty={bidQty.toString()}
             sellQty={askQty.toString()}
           />
-          <div className="sticky bottom-0 w-full bg-blackprimary px-4 py-3 border-t border-[rgba(100,100,100,0.25)]">
-            <div className="flex gap-4">
-              <Button
-                label="Buy"
-                variant="buy"
-                className="flex-1"
-                onClick={() =>
-                  navigate("/InstrumentOrderPlace", {
-                    state: { instrumentData, side: "buy" },
-                  })
-                }
-              />
-
-              <Button
-                label="Sell"
-                variant="sell"
-                className="flex-1"
-                onClick={() =>
-                  navigate("/InstrumentOrderPlace", {
-                    state: { instrumentData, side: "sell" },
-                  })
-                }
-              />
-            </div>
-          </div>
         </>
       ),
     },
@@ -221,7 +197,7 @@ const InstrumentDetails = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-blackprimary">
+    <div className="min-h-screen bg-blackprimary pb-20"> {/* Added pb-20 to prevent overlap with fixed buttons */}
       <TrendingListHeader
         label={instrumentData?.trading_name ?? "Instrument"}
       />
@@ -252,6 +228,35 @@ const InstrumentDetails = () => {
       <div>
         {TabData.find((tab) => tab.id === activeTab)?.content}
       </div>
+
+      {/* -------- BUY/SELL BUTTONS (Only for Summary Tab) -------- */}
+      {activeTab === "summary" && (
+        <div className="fixed bottom-0 left-0 right-0 bg-blackprimary px-4 py-3 border-t border-[rgba(100,100,100,0.25)] z-50">
+          <div className="flex gap-4 max-w-[412px] mx-auto"> {/* Added max-w and mx-auto for centering on wider screens */}
+            <Button
+              label="Buy"
+              variant="buy"
+              className="flex-1"
+              onClick={() =>
+                navigate("/InstrumentOrderPlace", {
+                  state: { instrumentData,  side:"buy" },
+                })
+              }
+            />
+
+            <Button
+              label="Sell"
+              variant="sell"
+              className="flex-1"
+              onClick={() =>
+                navigate("/InstrumentOrderPlace", {
+                  state: { instrumentData , side:"sell" },
+                })
+              }
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

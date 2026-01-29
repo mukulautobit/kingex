@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import HeaderBar from '../../components/searchHeader/HeaderBar'
 import filterIcon from "../../assets/icons/lineFilter.svg"
 import searchtwo from "../../assets/icons/searchtwo.svg"
@@ -91,25 +91,25 @@ const Portfolio = () => {
           {activeTab === "positions" && (
             <div className="flex flex-col">
               {instruments.length === 0 ? (
-  <div className="p-[20px] text-[12px] text-grayprimary">
-    No instruments available
-  </div>
-) : (
-  instruments.map((item: any) => (
-    <PositionCard
-      key={item.id}
-      symbol={item.name}
-      profit={item.dinamic_data?.quotes?.ltp?.[0]?.toString()}
-      profitPositive={true}
-      type="Market"
-      time={new Date(
-        item.dinamic_data?.quotes?.ltpt?.[0]
-      ).toLocaleString()}
-      flag1={euflag}
-      flag2={usflag}
-    />
-  ))
-)}
+                <div className="p-[20px] text-[12px] text-grayprimary">
+                  No instruments available
+                </div>
+              ) : (
+                instruments.map((item: any) => (
+                  <PositionCard
+                    key={item.id}
+                    symbol={item?.feeding_name}
+                    profit={item.dinamic_data?.quotes?.ltp?.[0]?.toString()}
+                    profitPositive={true}
+                    type="Market"
+                    time={new Date(
+                      item?.dinamic_data?.quotes?.ltpt?.[0]
+                    ).toLocaleString()}
+                    flag1={euflag}
+                    flag2={usflag}
+                  />
+                ))
+              )}
 
             </div>
           )}

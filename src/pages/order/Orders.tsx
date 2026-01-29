@@ -34,15 +34,26 @@ const Orders = () => {
 
    const { orders } = useAppSelector(state => state.openOrders)
    const apiStatus = useAppSelector((state: RootState) => state.websockets.apiStatus);
+   const instrument = useAppSelector((state)=> state.instruments.data)
 
     console.log(orders)
-
+  console.log(instrument)
    useEffect(()=>{
      if (apiStatus === "connected") {
      dispatch(fetchOpenOrders())
      }
 
    },[apiStatus, dispatch])
+
+
+     const findInstrument = (instrumentId: string) => {
+    // Flatten all instrument arrays into one for easier searching
+    const allInstruments = [
+      ...(instrument.stock || [])
+    ];
+    // Find the matching instrument
+    return allInstruments.find((inst: any) => inst.id === instrumentId);
+  };
 
 
   return (
@@ -95,18 +106,21 @@ const Orders = () => {
         No open orders
       </div>
     ) : (
-      orders.map((order: any) => (
-        <RegularCard
+      orders.map((order: any) => {
+         const matchedInstrument = findInstrument(order.instrument_id);
+        const symbol = matchedInstrument ? matchedInstrument.feeding_name : (order.trading_name || "ICIC");
+          console.log(symbol)
+       return ( <RegularCard
           key={order.id}
-          symbol={order.trading_name || "ICIC"}
+          symbol={symbol || "ICIC"}
           fromPrice={order.price.toString()}          //  price
           toPrice={"--"}                              // optional
           orderType={`${order.side.toUpperCase()} ${order.order_type}`}
           quantity={order.placed_qty.toString()}
           dateTime={new Date(order.placed_time * 1000).toLocaleString()}
           showSL={true}
-        />
-      ))
+        />  )
+})
     )}
 
   </div>

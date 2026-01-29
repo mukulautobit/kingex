@@ -57,7 +57,7 @@ const PositionCard: React.FC<PositionCardProps> = ({
                 profitPositive ? "text-[#00B306]" : "text-red-500"
               }`}
             >
-              {profit}
+              {profit?profit: "No Availabel"}
             </span>
           </div>
 
