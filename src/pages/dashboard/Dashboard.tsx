@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../store/hook'
 import { fetchCategories } from '../../store/slices/categoriesSlice'
 import stocksIcon from "../../assets/icons/tradingstocks.svg"
 import { fetchAccounts } from '../../store/slices/accountSlice'
-import { showToasty } from '../../store/slices/notificationSlice'
+// import { showToasty } from '../../store/slices/notificationSlice'
 
 // import trendingStocks from "../../assets/icons/trendingStocks.svg"
 // import BottomBar from '../../components/bottomBar/BottomBar'

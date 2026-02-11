@@ -57,7 +57,7 @@ export const AppRouter = createBrowserRouter([
         element: <Orders />,
       },
       {
-        path: "history",
+        path: "wallet",
         element: <History />,
       },
     ],

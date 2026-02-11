@@ -34,7 +34,7 @@ const InstrumentOrderPlace = () => {
   const selectedInstrumentId = useAppSelector(
     (state) => state.instruments.selectedInstrumentId
   );
-
+    console.log(setMarketPrice)
   const accountsData = useAppSelector(
     (state) => state.accounts.data as Account[]
   );

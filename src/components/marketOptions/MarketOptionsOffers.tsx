@@ -2,7 +2,7 @@
 // import stocksIcon from "../../assets/icons/trendingStocks.svg"
 import cash from "../../assets/icons/cash.svg"
 import fno from "../../assets/icons/fno.svg"
-import stock from "../../assets/icons/stocks.svg"
+import stock from "../../assets/icons/stock.svg"
 import mcx from "../../assets/icons/mcx.svg"
 
 const MarketOptionsOffers = () => {
@@ -33,7 +33,7 @@ const MarketOptionsOffers = () => {
               font-poppins font-[275]
               text-[12px] leading-[18px]
               text-center
-              text-main
+              text-grayprimary
             "
           >
             Cash
@@ -48,7 +48,7 @@ const MarketOptionsOffers = () => {
               font-poppins font-[275]
               text-[12px] leading-[18px]
               text-center
-              text-main
+              text-grayprimary
             "
           >
             F&amp;O
@@ -63,7 +63,7 @@ const MarketOptionsOffers = () => {
               font-poppins font-[275]
               text-[12px] leading-[18px]
               text-center
-              text-main
+              text-grayprimary
             "
           >
             Stocks
@@ -78,7 +78,7 @@ const MarketOptionsOffers = () => {
               font-poppins font-[275]
               text-[12px] leading-[18px]
               text-center
-              text-main
+              text-grayprimary
             "
           >
             MCX

@@ -12,8 +12,10 @@ import portfolioselected from "../assets/icons/portfolioselected.svg";
 import orderIcon from "../assets/icons/orderIcon.svg";
 import orderselected from "../assets/icons/orderselected.svg";
 
-import historyIcon from "../assets/icons/historyIcon.svg";
-import historyselected from "../assets/icons/historyselected.svg";
+// import historyIcon from "../assets/icons/historyIcon.svg";
+import wallet from "../assets/icons/wallet.svg"
+import walletselected from "../assets/icons/walletselected.svg"
+// import historyselected from "../assets/icons/historyselected.svg";
 
 export const navItems = [
   {
@@ -41,10 +43,10 @@ export const navItems = [
     selectedIcon: orderselected,
   },
   {
-    label: "History",
-    path: "/history",
-    icon: historyIcon,
-    selectedIcon: historyselected,
+    label: "wallet",
+    path: "/wallet",
+    icon: wallet,
+    selectedIcon: walletselected,
   },
 ];
 

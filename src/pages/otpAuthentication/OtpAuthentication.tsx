@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import {  useState } from "react";
 import otpIcon from "../../assets/icons/otpIcononly.svg";
 import tickIcon from "../../assets/icons/loginTick.svg";
 import loderIcon from "../../assets/icons/loader.svg";
@@ -50,7 +50,7 @@ const OtpAuthentication = () => {
   const [screen, setScreen] = useState<
     "otp" | "loading" | "success"
   >("otp");
-  const tokenRef = useRef<string>("")
+  // const tokenRef = useRef<string>("")
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch()

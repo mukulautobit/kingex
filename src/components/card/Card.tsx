@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { formatPrice, usePrevious } from "../../Utils/HelperFunction";
+import { usePrevious } from "../../Utils/HelperFunction";
 // import notFavouriteTickLight from "../../assets/icons/notFavrouiteTickLight.svg";
 // import favouriteTickLight from "../../assets/icons/favrouiteTickLight.svg";
 // import notFavouriteTick from "../../assets/icons/notFavrouiteTick.svg";
@@ -33,11 +33,11 @@ const Card = ({
   low,
   ltp,
   close,
-  pip,
+  // pip,
   timestamp,
   // cardIcon,
   onClick,
-  active,
+  // active,
   // favourites,
 }: CardProps) => {
   // const askPrice = formatPrice(ask, pip);

@@ -52,7 +52,7 @@ const BottomBar = () => {
                   font-poppins
                   text-[10px] leading-[15px]
                   
-                  ${isActive ? "text-main font-medium" : "font-light text-[#FAFAFA]"}
+                  ${isActive ? "text-grayprimary font-medium" : "font-light text-[#FAFAFA]"}
                 `}
               >
                 {item.label}

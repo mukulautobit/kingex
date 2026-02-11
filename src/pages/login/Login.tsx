@@ -42,7 +42,7 @@ const Login = () => {
       dispatch(
           showToasty({
           type: "success",
-          message: "Login successfully"
+          message: "OTP successfully"
         }))
     }
 

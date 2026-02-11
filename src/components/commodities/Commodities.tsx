@@ -11,6 +11,7 @@ import Card from '../card/Card'
 import { subscribeToInstruments } from '../../service/socketService'
 
 
+const tabs: string[] = ["Crude Oil", "Gold", "Silver", "Natural Gas"];
 
 
 const Commodities = ({ icon, label = "stock", search }: CommoditiesHeaderProps & { search: string }) => {
@@ -18,7 +19,8 @@ const Commodities = ({ icon, label = "stock", search }: CommoditiesHeaderProps &
   const dispatch = useAppDispatch();
   const [subscribedIds, setSubscribedIds] = useState<string[]>([]);
   const apiStatus = useAppSelector(state=> state.websockets.apiStatus)
-  const {data, error, status} = useAppSelector(state=> state.instruments)
+  const {data} = useAppSelector(state=> state.instruments)
+  const [activeTab, setActiveTab] = useState<string>("Crude Oil");
   // const {positions} = useAppSelector(state=> state.positions)
   const stremStatus = useAppSelector((state:RootState)=> state.websockets.streamStatus)
 
@@ -96,7 +98,38 @@ useEffect(() => {
       "
     >
      <CommoditiesHeader icon={icon} label={label}/>
+     {/* Tabs */}
+         <div className="w-full overflow-x-auto">
+      <div className="flex items-center gap-[10px] h-[49px]">
+        {tabs.map((tab) => {
+          const isActive = activeTab === tab;
 
+          return (
+            <button
+              key={tab}
+              onClick={() => setActiveTab(tab)}
+              className={`
+                flex items-center justify-center
+                px-2.5 py-1
+                h-6.5
+                text-[12px] leading-4.5
+                font-normal
+                rounded-md
+                whitespace-nowrap
+                transition-all duration-200
+                ${
+                  isActive
+                    ? "bg-main/20 border border-main text-grayprimary"
+                    : "border border-grayprimary text-grayprimary opacity-20 hover:opacity-60"
+                }
+              `}
+            >
+              {tab}
+            </button>
+          );
+        })}
+      </div>
+    </div>
        {/* ---------- ITEMS ---------- */}
       <div className='pb-20'>
       {
