@@ -13,13 +13,13 @@ import { useAppDispatch } from "../../store/hook";
 
 const LoginSuccessfulPage = ({ onGoHome }: { onGoHome: () => void }) => {
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-[20px] bg-blackprimary">
-      <div className="flex flex-col items-center gap-[44px]">
+    <div className="min-h-screen flex flex-col justify-center items-center px-5 bg-blackprimary">
+      <div className="flex flex-col items-center gap-11">
 
-        <div className="flex flex-col items-center gap-[10px] w-[282px]">
-          <div className="relative w-[106px] h-[106px] flex items-center justify-center">
-            <div className="absolute inset-0 rounded-full border-[6px] border-greenshadeone" />
-            <img src={tickIcon} className="w-[76px] h-[76px]" />
+        <div className="flex flex-col items-center gap-2.5 w-70.5">
+          <div className="relative w-26.5 h-26.5 flex items-center justify-center">
+            <div className="absolute inset-0 rounded-full border-[6px] " />
+            <img src={tickIcon} className="w-19 h-19" />
           </div>
 
           <h1 className="text-[16px] font-semibold text-grayprimary text-center">
@@ -33,7 +33,7 @@ const LoginSuccessfulPage = ({ onGoHome }: { onGoHome: () => void }) => {
 
         <button
           onClick={onGoHome}
-          className="w-43.5 h-11 bg-main rounded-md text-blackprimary"
+          className="w-43.5 h-11 bg-main rounded-md text-grayprimary"
         >
           Go home
         </button>

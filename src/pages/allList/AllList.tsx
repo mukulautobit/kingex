@@ -1,11 +1,13 @@
 import  { useState } from 'react'
 import SearchHeaderBar from '../../components/searchHeaderBar/SearchHeaderBar';
 import CommoditiesItem from '../../components/commoditiesItem/CommoditiesItem';
-type TabId = "all" | "cash";
+type TabId = "all" | "cash" | "f&o" | "currency";
 
 const tabs: { id: TabId; label: string; width: string }[] = [
     { id: "all", label: "All", width: "w-[50px]" },
     { id: "cash", label: "Cash", width: "w-[70px]" },
+    { id: "f&o", label: "F&O", width: "w-[70px]" },
+    { id: "currency", label: "Currency", width: "w-[70px]" },
 ];
 
 const AllList = () => {
@@ -58,7 +60,7 @@ const AllList = () => {
                                     tradeName={"SBI"}
                                     exchange={"buy"}
                                     ltp={5}
-                                    pnl={4}                 // ✅ FINAL VALUE PASSED
+                                    pnl={4}                 // FINAL VALUE PASSED
                                     timestamp={1769246240}
                                 />
 

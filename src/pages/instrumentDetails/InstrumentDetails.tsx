@@ -41,6 +41,8 @@ const InstrumentDetails = () => {
   const location = useLocation();
   const { instrumentData } = location.state || {};
 
+  
+    console.log(instrumentData)
   /* ---------- SAFE DATA EXTRACTION ---------- */
   const quotes = instrumentData?.dinamic_data?.quotes;
 
@@ -76,10 +78,10 @@ const InstrumentDetails = () => {
         <div className="py-5 border-b border-[rgba(100,100,100,0.25)]">
           <div className="flex justify-center gap-[59px] text-center">
             {[
-              { label: "Open", value: "199.5" },
-              { label: "High", value: "199.5" },
-              { label: "Low", value: "199.5" },
-              { label: "Prev. close", value: "199.5" },
+              { label: "Open", value: open },
+              { label: "High", value: high },
+              { label: "Low", value: low },
+              { label: "Prev. close", value: prevClose },
             ].map((item) => (
               <div key={item.label} className="flex flex-col items-center">
                 <span className="text-[12px] font-light text-white">
@@ -103,7 +105,7 @@ const InstrumentDetails = () => {
             </p>
 
             <div className="mt-2">
-              <div className="flex h-[6px] rounded overflow-hidden">
+              <div className="flex h-1.5 rounded overflow-hidden">
                 <div className="w-[60%] bg-main" />
                 <div className="flex-1 bg-main/50" />
               </div>
@@ -122,9 +124,9 @@ const InstrumentDetails = () => {
             </p>
 
             <div className="mt-2">
-              <div className="flex h-[6px] rounded overflow-hidden">
-                <div className="w-[60%] bg-[#5B298C]" />
-                <div className="flex-1 bg-[#5B298C]/50" />
+              <div className="flex h-1.5 rounded overflow-hidden">
+                <div className="w-[60%] bg-main" />
+                <div className="flex-1 bg-main/50" />
               </div>
 
               <div className="flex justify-between text-[10px] text-[#D1C3C3] mt-1">
@@ -174,10 +176,10 @@ const InstrumentDetails = () => {
                     highlightSell ? "bg-[#BF333320]" : ""
                   }`}
                 >
-                  <span className="text-[#BF3333] text-[14px]">
+                  <span className="text-redsecondary text-[14px]">
                     {ask.toFixed(2)}
                   </span>
-                  <span className="text-[#BF3333] text-[14px]">
+                  <span className="text-redsecondary text-[14px]">
                     {askQty}
                   </span>
                 </div>
@@ -207,8 +209,8 @@ const InstrumentDetails = () => {
     {
       id: "optionChain",
       content: (
-        <div className="w-full max-w-[412px] px-0 py-[16px] flex flex-col gap-[10px]">
-          <div className="flex text-[14px] font-medium text-[#D9D9D9]">
+        <div className="w-full max-w-103 px-0 py-4 flex flex-col gap-2.5">
+          <div className="flex text-[14px] font-medium text-grayprimary">
             {["OI Chg", "Call LTP", "Strike Price", "Put LTP", "OI Chg"].map(
               (h,i) => (
                 <div key={i} className="flex-1 text-center font-medium">
@@ -222,7 +224,7 @@ const InstrumentDetails = () => {
             {optionChainData.map((row, idx) => (
               <div
                 key={idx}
-                className="border-b border-[rgba(41,45,61,0.25)] py-[4px]"
+                className="border-b border-[rgba(41,45,61,0.25)] py-1"
               >
                 <div className="flex text-[14px]">
                   <div className="flex-1 text-center text-[#B30000]">

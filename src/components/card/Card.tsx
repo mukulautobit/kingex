@@ -126,7 +126,7 @@ const Card = ({
 
         {/* Prices */}
         <div className="flex items-center mt-2">
-          {/* BID */}
+          {/* ASK */}
           <div className="text-right pr-2">
             {/* {bidPrice.isPipFormatted ? (
               <p
@@ -150,30 +150,22 @@ const Card = ({
             </p>
           </div>
 
-          {/* ASK */}
-          <div className="text-right pl-2">
-            {/* {askPrice.isPipFormatted ? (
-              <p
-                className={`${askColor} leading-5 transition-colors duration-200 flex items-baseline`}
-              >
-                <span className="text-xs">{askPrice.main}</span>
-                <span className="text-sm">{askPrice.pipsOrSmall}</span>
-                <span className="text-xs">{askPrice.small}</span>
-              </p>
-            ) : ( */}
+          {/* BID */}
+          {/* <div className="text-right pl-2">
+            
             <p
               className={`${askColor} leading-5 transition-colors duration-200`}
             >
-              {/* <span>{askPrice.main}</span> */}
+              
               <span>{bid}</span>
-              {/* <span className="text-sx">{askPrice.pipsOrSmall}</span> */}
+              
             </p>
-            {/* )} */}
+            
             <p className="text-sm text-grayprimary w-[85px]">
               <span>H: </span>
               {high.toFixed(2)}
             </p>
-          </div>
+          </div> */}
         </div>
 
         

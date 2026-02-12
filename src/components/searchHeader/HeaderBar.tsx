@@ -56,7 +56,7 @@ const HeaderBar: React.FC<HeaderBarProps> = ({
 
       {/* Center Section */}
       {showSearch ? (
-        <div className="flex items-center gap-[12px] h-[35px] flex-1 px-[8px] py-[7px] rounded-[10px] bg-blacksecondary">
+        <div className="flex items-center gap-[12px] h-[35px] flex-1 px-[8px] py-[7px] rounded-[10px] bg-mainsecondary">
           {rightIcons}
           <input
             placeholder={placeholder}

@@ -1,4 +1,5 @@
 import lossDownArrow from "../../assets/icons/lossDownArrow.svg";
+import profitupArrow from "../../assets/icons/profitsuparrow.svg";
 
 interface PortfolioSummaryCardProps {
   totalValue: number;
@@ -33,60 +34,64 @@ const PortfolioSummaryCard = ({
   const isLoss = overallPnL < 0;
 
   return (
-    <div className="w-full max-w-[412px] mx-auto px-5 py-5 flex flex-col gap-5">
+    <div className="w-full max-w-103 mx-auto px-5 py-5 flex flex-col gap-5">
 
       {/* ================= MAIN CARD ================= */}
-      <div className="rounded-[20px] border border-[#272727] bg-gradient-to-r from-[#1D1A23] via-[#292531] to-[#1D1A23]">
+      <div className="rounded-[20px] border border-brshadeone bg-linear-to-r from-[#1D1A23] via-mainsecondary to-blacktertiary">
 
         {/* ===== TOP SECTION ===== */}
         <div className="px-5 py-4 flex flex-col gap-1">
 
           {/* Total Value */}
-          <p className="text-[21px] text-[#D9D9D9] font-normal">
+          <p className="text-[21px] text-grayprimary font-normal">
             ₹{totalValue.toFixed(2)}
           </p>
 
           {/* Overall PnL */}
           <div className="flex items-center gap-1 text-[12px]">
-            <span className={`${isLoss ? "text-[#BF3333]" : "text-[#33BF90]"}`}>
+            <span className={`${isLoss ? "text-redsecondary" : "text-greenshadeone"}`}>
               {isLoss ?( 
                 <img 
                 src={lossDownArrow}
                 className="w-4.5 h-4.5"
                 />
             ) :( 
-                "↑")}
+              <img 
+                src={profitupArrow}
+                className="w-4.5 h-4.5"
+                />  
+              )}
             </span>
 
-            <span className="text-[#D9D9D9]">
+            <span className="text-grayprimary">
               {isLoss ? "Overall Loss" : "Overall Gain"}
             </span>
 
-            <span className={`${isLoss ? "text-[#BF3333]" : "text-[#33BF90]"}`}>
+            <span className={`${isLoss ? "text-redsecondary" : "text-greenshadeone"}`}>
               ₹{Math.abs(overallPnL).toFixed(2)}
             </span>
           </div>
         </div>
 
         {/* ===== BOTTOM SECTION ===== */}
-        <div className="border-t border-[#292531] px-5 py-3 flex justify-between">
+        <div className="border-t border-mainsecondary px-5 py-3 flex justify-between">
 
           {/* Invested */}
           <div className="flex flex-col">
-            <span className="text-[12px] text-[#D9D9D9] font-light">
+            <span className="text-[12px] text-grayprimary font-light">
               Invested Value
             </span>
-            <span className="text-[12px] text-[#D9D9D9] font-semibold">
+            <span className="text-[12px] text-grayprimary font-semibold">
               ₹{investedValue}
             </span>
           </div>
 
           {/* Today Gain */}
           <div className="flex flex-col items-end">
-            <span className="text-[12px] text-[#D9D9D9] font-light">
+            <span className="text-[12px] text-grayprimary font-light">
               Today’s Gain
             </span>
-            <span className="text-[12px] font-medium text-[#33BF90]">
+            <span className="text-[12px] font-medium text-greenshadeone">
               ₹{todaysGain} ({todaysGainPercent}%)
             </span>
           </div>
@@ -94,24 +99,24 @@ const PortfolioSummaryCard = ({
       </div>
 
       {/* ================= STOCK ROW ================= */}
-      <div className="flex items-center gap-5 py-3 border-b border-[#272727]">
+      <div className="flex items-center gap-5 py-3 border-b border-brshadeone">
 
         {/* Left side */}
         <div className="flex flex-col">
-          <p className="text-[14px] text-[#D9D9D9]">
+          <p className="text-[14px] text-grayprimary">
             {stockName}
           </p>
-          <p className="text-[12px] text-[#D9D9D9] font-light">
+          <p className="text-[12px] text-grayprimary font-light">
             {quantity} x ATP ₹{atp}
           </p>
         </div>
 
         {/* Right side */}
         <div className="ml-auto flex flex-col items-end">
-          <p className="text-[14px] font-medium text-[#33BF90]">
+          <p className="text-[14px] font-medium text-greenshadeone">
             ₹{stockPnL} ({stockPnLPercent}%)
           </p>
-          <p className="text-[12px] text-[#D9D9D9] font-light">
+          <p className="text-[12px] text-grayprimary font-light">
             LTP ₹{ltp} ({ltpPercent}%)
           </p>
         </div>

@@ -29,7 +29,9 @@ const SearchHeaderBar: React.FC<SearchHeaderBarProps> = ({
         onClick={onClose}
         className="w-[35px] h-[35px] flex items-center justify-center"
       >
-        <img src={crossIcon} className="w-[18px] h-[18px]" />
+        <img src={crossIcon} 
+        // className="w-[18px] h-[18px]" 
+        />
       </button>
 
       {/* Search Field */}
