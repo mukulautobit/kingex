@@ -22,24 +22,24 @@ const PositionCard: React.FC<PositionCardProps> = ({
   return (
     <div
       className="
-        w-[412px] h-[70px]
-        bg-[#0D0D0D]
-        border-b border-[#181818]
-        px-[20px] py-[10px]
+        w-103 h-17.5
+        bg-bgprimary
+        border-b border-blacksecondary
+        px-5 py-2.5
         flex flex-col
       "
     >
-      <div className="flex items-center gap-[10px] w-full h-[50px]">
+      <div className="flex items-center gap-2.5 w-full h-12.5">
         
         {/* Flags */}
-        <div className="relative w-[33px] h-[29px]">
+        <div className="relative w-8.25 h-7.25">
           <img
             src={flag1}
-            className="absolute w-[24px] h-[24px] rounded-full border border-[#D9D9D9]"
+            className="absolute w-6 h-6 rounded-full border border-grayprimary"
           />
           <img
             src={flag2}
-            className="absolute left-[9px] top-[6px] w-[24px] h-[24px] rounded-full border border-[#D9D9D9]"
+            className="absolute left-2.25 top-1.5 w-6 h-6 rounded-full border border-grayprimary"
           />
         </div>
 
@@ -47,13 +47,13 @@ const PositionCard: React.FC<PositionCardProps> = ({
         <div className="flex flex-col w-full h-full">
           
           {/* Top row */}
-          <div className="flex items-center justify-between py-[4px]">
-            <span className="font-poppins font-[500] text-[14px] text-[#D9D9D9]">
+          <div className="flex items-center justify-between py-1">
+            <span className="font-poppins font-medium text-[14px] text-grayprimary">
               {symbol}
             </span>
 
             <span
-              className={`font-poppins font-[500] text-[14px] ${
+              className={`font-poppins font-medium text-[14px] ${
                 profitPositive ? "text-[#00B306]" : "text-red-500"
               }`}
             >
@@ -63,11 +63,11 @@ const PositionCard: React.FC<PositionCardProps> = ({
 
           {/* Bottom row */}
           <div className="flex items-center justify-between">
-            <span className="font-poppins font-[400] text-[14px] text-[#D9D9D9]">
+            <span className="font-poppins font-normal text-[14px] text-grayprimary">
               {type}
             </span>
 
-            <span className="font-poppins font-[400] text-[14px] text-[#D9D9D9] text-right">
+            <span className="font-poppins font-normal text-[14px] text-grayprimary text-right">
               {time}
             </span>
           </div>

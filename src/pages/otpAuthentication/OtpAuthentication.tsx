@@ -18,22 +18,22 @@ const LoginSuccessfulPage = ({ onGoHome }: { onGoHome: () => void }) => {
 
         <div className="flex flex-col items-center gap-[10px] w-[282px]">
           <div className="relative w-[106px] h-[106px] flex items-center justify-center">
-            <div className="absolute inset-0 rounded-full border-[6px] border-[#FACA46]" />
+            <div className="absolute inset-0 rounded-full border-[6px] border-greenshadeone" />
             <img src={tickIcon} className="w-[76px] h-[76px]" />
           </div>
 
-          <h1 className="text-[16px] font-semibold text-[#FACA46] text-center">
+          <h1 className="text-[16px] font-semibold text-grayprimary text-center">
             Login Successfully
           </h1>
 
-          <p className="text-[12px] text-[#D9D9D9] text-center">
+          <p className="text-[12px] text-grayprimary text-center">
             Congratulations on successfully logged in <br /> Kingex
           </p>
         </div>
 
         <button
           onClick={onGoHome}
-          className="w-[174px] h-[44px] bg-[#FACA46] rounded-[6px] text-[#0D0D0D]"
+          className="w-43.5 h-11 bg-main rounded-md text-blackprimary"
         >
           Go home
         </button>
@@ -108,7 +108,7 @@ console.log(phone)
 
   /* ---------------- SUCCESS ---------------- */
 
-  if (screen === "success") {
+  if ("success" === "success") {
     localStorage.setItem("ASSESS","Allow")
     return <LoginSuccessfulPage onGoHome={() => navigate("/")} />;
   }
@@ -144,11 +144,11 @@ console.log(phone)
     >
       {/* ICON */}
      <div className="flex flex-col items-center gap-[22px] relative">
-  <img src={otpIcon} className="w-[256px] h-[256px]" />
+        <img src={otpIcon} className="w-[256px] h-[256px]" />
 
-  <h1 className="text-main absolute top-[150px]">
-    Enter One Time Password
-  </h1>
+         <h1 className="text-grayprimary absolute top-[150px]">
+             Enter One Time Password
+           </h1>
 
   <p
     className="
@@ -182,10 +182,10 @@ console.log(phone)
                 w-[46px] h-[56px]
                 text-center
                 text-[30px]
-                text-[#FACA46]
-                bg-[rgba(250,202,70,0.1)]
-                border border-[#FACA46]
-                rounded-[6px]
+                text-main
+                bg-maintertiary/20
+                border border-main
+                rounded-md
                 outline-none
               "
             />
@@ -193,8 +193,8 @@ console.log(phone)
         </div>
 
         <div className="flex gap-[3px] text-[12px]">
-          <span className="text-[#D9D9D9]">Don’t receive OTP ?</span>
-          <button className="text-[#FACA46] font-medium">
+          <span className="text-grayprimary">Don’t receive OTP ?</span>
+          <button className="text-main font-medium">
             RESEND OTP
           </button>
         </div>
@@ -202,13 +202,13 @@ console.log(phone)
         <button
           onClick={handleVerify}
           className="
-            mt-[30px]
-            px-[40px] py-[6px]
-            bg-[#FACA46]
-            rounded-[4px]
+            mt-7.5
+            px-10 py-1.5
+            bg-main
+            rounded-sm
             text-[16px]
             font-medium
-            text-[#0D0D0D]
+            text-grayprimary
             uppercase
           "
         >

@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import filterIcon from "../../assets/icons/lineFilter.svg"
 import searchtwo from "../../assets/icons/searchtwo.svg"
 import HeaderBar from '../../components/searchHeader/HeaderBar'
@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from '../../store/hook'
 // import { useDispatch } from 'react-redux'
 import type { RootState } from '../../store/Store'
 import { fetchOpenOrders } from '../../store/slices/openOrdersSlice'
+import emptyFileIcons from "../../assets/icons/emptyFileIcons.svg"
+import EmptyFileComponent from '../../components/emptyFileComponent/EmptyFileComponent'
 // import PositionCard from '../../components/positionCard/PositionCard'
 
 type TabId = "regular" | "mcx";
@@ -28,25 +30,25 @@ export const regularOrders = Array.from({ length: 4 }).map((_, i) => ({
 }));
 
 const Orders = () => {
-   const [activeTab, setActiveTab] = useState<TabId>("regular");
+  const [activeTab, setActiveTab] = useState<TabId>("regular");
 
-   const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch()
 
-   const { orders } = useAppSelector(state => state.openOrders)
-   const apiStatus = useAppSelector((state: RootState) => state.websockets.apiStatus);
-   const instrument = useAppSelector((state)=> state.instruments.data)
+  const { orders } = useAppSelector(state => state.openOrders)
+  const apiStatus = useAppSelector((state: RootState) => state.websockets.apiStatus);
+  const instrument = useAppSelector((state) => state.instruments.data)
 
-    console.log(orders)
+  console.log(orders)
   console.log(instrument)
-   useEffect(()=>{
-     if (apiStatus === "connected") {
-     dispatch(fetchOpenOrders())
-     }
+  useEffect(() => {
+    if (apiStatus === "connected") {
+      dispatch(fetchOpenOrders())
+    }
 
-   },[apiStatus, dispatch])
+  }, [apiStatus, dispatch])
 
 
-     const findInstrument = (instrumentId: string) => {
+  const findInstrument = (instrumentId: string) => {
     // Flatten all instrument arrays into one for easier searching
     const allInstruments = [
       ...(instrument.stock || [])
@@ -58,7 +60,7 @@ const Orders = () => {
 
   return (
     <div>
-       <HeaderBar
+      <HeaderBar
         title="ORDER"
         rightIcons={
           <>
@@ -67,74 +69,70 @@ const Orders = () => {
           </>
         }
       />
-    {/* ------------------------TABS------------------------------ */}
+      {/* ------------------------TABS------------------------------ */}
 
-     <div className="bg-blackprimary">
+      <div className="bg-bgprimary">
 
-      {/* ---------- TABS ---------- */}
-      <div className="w-full max-w-[412px] h-[44px] px-[20px] flex gap-[10px] border-b border-[#181818]">
-        {tabs.map((tab) => {
-          const isActive = activeTab === tab.id;
+        {/* ---------- TABS ---------- */}
+        <div className="w-full max-w-[412px] h-[44px] px-[20px] flex gap-[10px] border-b border-[#181818]">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
 
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`${tab.width} h-[44px] px-[10px] flex items-center justify-center ${
-                isActive ? "border-b-2 border-[#D9D9D9]" : ""
-              }`}
-            >
-              <span
-                className={`text-[12px] text-[#D9D9D9] ${
-                  isActive ? "font-medium" : "font-light"
-                }`}
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`${tab.width} h-[44px] px-[10px] flex items-center justify-center ${isActive ? "border-b-2 border-[#D9D9D9]" : ""
+                  }`}
               >
-                {tab.label}
-              </span>
-            </button>
-          );
-        })}
+                <span
+                  className={`text-[12px] text-[#D9D9D9] ${isActive ? "font-medium" : "font-light"
+                    }`}
+                >
+                  {tab.label}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* ---------- TAB CONTENT ---------- */}
+        <div className="w-full max-w-[412px]">
+          {activeTab === "regular" && (
+            <div className="flex flex-col">
+
+              {orders.length === 0 ? (
+                <EmptyFileComponent label={"No instruments available"}/>
+              ) : (
+                orders.map((order: any) => {
+                  const matchedInstrument = findInstrument(order.instrument_id);
+                  const symbol = matchedInstrument ? matchedInstrument.feeding_name : (order.trading_name || "ICIC");
+                  console.log(symbol)
+                  return (<RegularCard
+                    key={order.id}
+                    symbol={symbol || "ICIC"}
+                    fromPrice={order.price.toString()}          //  price
+                    toPrice={"--"}                              // optional
+                    orderType={`${order.side.toUpperCase()} ${order.order_type}`}
+                    quantity={order.placed_qty.toString()}
+                    dateTime={new Date(order.placed_time * 1000).toLocaleString()}
+                    showSL={true}
+                  />)
+                })
+              )}
+
+            </div>
+          )}
+
+
+          {activeTab === "mcx" && (
+            <div className="p-5 text-[12px] text-grayprimary">
+              <EmptyFileComponent label={"No Data Availabel"}/>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* ---------- TAB CONTENT ---------- */}
-      <div className="w-full max-w-[412px]">
-        {activeTab === "regular" && (
-  <div className="flex flex-col">
-
-    {orders.length === 0 ? (
-      <div className="p-[20px] text-[12px] text-grayprimary">
-        No open orders
-      </div>
-    ) : (
-      orders.map((order: any) => {
-         const matchedInstrument = findInstrument(order.instrument_id);
-        const symbol = matchedInstrument ? matchedInstrument.feeding_name : (order.trading_name || "ICIC");
-          console.log(symbol)
-       return ( <RegularCard
-          key={order.id}
-          symbol={symbol || "ICIC"}
-          fromPrice={order.price.toString()}          //  price
-          toPrice={"--"}                              // optional
-          orderType={`${order.side.toUpperCase()} ${order.order_type}`}
-          quantity={order.placed_qty.toString()}
-          dateTime={new Date(order.placed_time * 1000).toLocaleString()}
-          showSL={true}
-        />  )
-})
-    )}
-
-  </div>
-)}
-
-
-        {activeTab === "mcx" && (
-          <div className="p-[20px] text-[12px] text-grayprimary">
-            No data available
-          </div>
-        )}
-      </div>
-    </div>
-      
     </div>
   )
 }

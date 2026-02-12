@@ -41,7 +41,7 @@ const TrendingListDetails = () => {
         h-[44px]
         px-[20px]
         flex items-start gap-[10px]
-        border-b border-[#181818]
+        border-b border-blacksecondary
       "
             >
                 {tabs.map((tab) => {
@@ -63,7 +63,7 @@ const TrendingListDetails = () => {
               h-[44px]
               px-[10px]
               flex items-center justify-center
-              ${isActive ? "border-b-2 border-[#D9D9D9]" : ""}
+              ${isActive ? "border-b-2 border-grayprimary" : ""}
             `}
                         >
                             <span
@@ -98,29 +98,29 @@ const TrendingListDetails = () => {
                             key={item.label}
                             onClick={() => setActive(item.label)}
                             className={`
-              ${item.width}
-              h-[26px]
-              px-[10px] py-[4px]
-              flex items-center justify-center
-              gap-[10px]
-              rounded-[6px]
-              border
-              transition-all
-              ${isActive
-                                    ? "bg-[rgba(239,191,4,0.2)] border-main"
+                            ${item.width}
+                            h-6.5
+                            px-2.5 py-1
+                            flex items-center justify-center
+                            gap-2.5
+                            rounded-md
+                            border
+                            transition-all
+                            ${isActive
+                                    ? "bg-mainsecondary border-main"
                                     : "border-grayprimary opacity-20"
                                 }
-            `}
+                                `}
                         >
                             <span
                                 className={`
-                font-poppins font-normal
-                text-[12px] leading-[18px]
-                ${isActive
+                                 font-poppins font-normal
+                                text-[12px] leading-4.5
+                                 ${isActive
                                         ? "text-main"
                                         : "text-grayprimary"
                                     }
-              `}
+                                 `}
                             >
                                 {item.label}
                             </span>

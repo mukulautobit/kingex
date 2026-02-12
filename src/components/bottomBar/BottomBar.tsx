@@ -1,4 +1,3 @@
-// import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { navItems } from "../../Utils/HelperFunction";
 
@@ -9,22 +8,21 @@ const BottomBar = () => {
   return (
     <div
       className="
-        fixed bottom-0 block left-1/2 -translate-x-1/2
+        fixed bottom-0 left-0 right-0
+        h-[85px]
+        bg-[#1D1A23]
+        border-t border-[#272727]
+        shadow-[0px_-4px_4px_rgba(0,0,0,0.25)]
         z-[100]
-        max-w-[412px] h-[97px]
-        p-[16px]
-        backdrop-blur-sm
+        flex justify-center
       "
     >
+      {/* Inner container (max 412px) */}
       <div
         className="
-          flex items-center justify-between
-          w-full h-[65px]
-          px-[16px] py-[10px]
-          gap-[36px]
-          rounded-[20px]
-          bg-[rgba(24,24,24,0.2)]
-          backdrop-blur-md
+          w-full max-w-[412px]
+          flex justify-between items-center
+          px-[16px] py-[20px]
         "
       >
         {navItems.map((item) => {
@@ -37,7 +35,7 @@ const BottomBar = () => {
               className={`
                 flex flex-col items-center justify-center gap-[6px]
                 w-[60px] h-[45px]
-                transition-all
+                transition-opacity
                 ${isActive ? "opacity-100" : "opacity-20"}
               `}
             >
@@ -49,10 +47,8 @@ const BottomBar = () => {
 
               <span
                 className={`
-                  font-poppins
-                  text-[10px] leading-[15px]
-                  
-                  ${isActive ? "text-grayprimary font-medium" : "font-light text-[#FAFAFA]"}
+                  text-[10px] leading-[15px] font-poppins
+                  ${isActive ? "font-medium text-[#D9D9D9]" : "font-light text-[#D9D9D9]"}
                 `}
               >
                 {item.label}

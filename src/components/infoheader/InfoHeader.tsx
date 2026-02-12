@@ -4,7 +4,7 @@ const InfoHeader = () => {
   return (
     <div
       className="
-        
+        bg-blacktertiary
         flex items-start
         h-[79px]
         px-[20px] py-[10px]
@@ -17,7 +17,7 @@ const InfoHeader = () => {
           h-[59px]
           flex-1
           p-[10px]
-          bg-[#181818]
+          bg-mainsecondary
           rounded-l-[10px]
         "
       >
@@ -25,7 +25,7 @@ const InfoHeader = () => {
           className="
             font-poppins font-medium
             text-[12px] leading-[18px]
-            text-[#D9D9D9]
+            text-grayprimary
           "
         >
           NIFTY 50
@@ -46,7 +46,7 @@ const InfoHeader = () => {
             className="
               font-poppins font-light
               text-[12px] leading-[18px]
-              text-[#D9D9D9]
+              text-grayprimary
             "
           >
             +132.40 (0.53%)
@@ -64,7 +64,7 @@ const InfoHeader = () => {
           h-[59px]
           flex-1
           p-[10px]
-          bg-[#181818]
+          bg-mainsecondary
           rounded-r-[10px]
         "
       >
@@ -72,7 +72,7 @@ const InfoHeader = () => {
           className="
             font-poppins font-medium
             text-[12px] leading-[18px]
-            text-[#D9D9D9]
+            text-grayprimary
           "
         >
           NIFTY BANK
@@ -93,7 +93,7 @@ const InfoHeader = () => {
             className="
               font-poppins font-light
               text-[12px] leading-[18px]
-              text-[#D9D9D9]
+              text-grayprimary
             "
           >
             +132.40 (0.53%)

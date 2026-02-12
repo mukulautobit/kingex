@@ -10,6 +10,7 @@ const tabs = [
   { id: "summary", label: "Summary", width: "w-[80px]" },
   { id: "optionChain", label: "Option Chain", width: "w-[98px]" },
   { id: "news", label: "News", width: "w-[98px]" },
+  { id: "fundamentals", label: "Fundamentals", width: "w-[98px]" },
 ];
 
 interface OptionRow {
@@ -69,72 +70,136 @@ const InstrumentDetails = () => {
       id: "summary",
       content: (
         <>
-          <div className="w-full max-w-[412px] py-[20px] flex flex-col">
+      <div className="w-full max-w-[412px] mx-auto flex flex-col bg-[#0F0F1A] rounded-t-[20px]">
 
-            {/* -------- TOP SUMMARY -------- */}
-            <div
-              onClick={handleSummaryClick}
-              className="pb-[20px] border-b border-[rgba(100,100,100,0.25)] cursor-pointer"
-            >
-              <div className="flex justify-center gap-[59px] text-center">
-                {[
-                  { label: "Open", value: open },
-                  { label: "High", value: high },
-                  { label: "Low", value: low },
-                  { label: "Prev. close", value: prevClose },
-                ].map((item) => (
-                  <div key={item.label} className="flex flex-col">
-                    <span className="text-[12px] font-light text-white">
-                      {item.label}
-                    </span>
-                    <span className="text-[12px] font-normal text-white">
-                      {item.value}
-                    </span>
-                  </div>
-                ))}
+        {/* ================= TOP OHLC ================= */}
+        <div className="py-5 border-b border-[rgba(100,100,100,0.25)]">
+          <div className="flex justify-center gap-[59px] text-center">
+            {[
+              { label: "Open", value: "199.5" },
+              { label: "High", value: "199.5" },
+              { label: "Low", value: "199.5" },
+              { label: "Prev. close", value: "199.5" },
+            ].map((item) => (
+              <div key={item.label} className="flex flex-col items-center">
+                <span className="text-[12px] font-light text-white">
+                  {item.label}
+                </span>
+                <span className="text-[12px] font-normal text-white">
+                  {item.value}
+                </span>
               </div>
-            </div>
+            ))}
+          </div>
+        </div>
 
-            {/* -------- TABLE HEADER -------- */}
-            <div className="flex border-b border-[rgba(100,100,100,0.25)]">
-              {["Qty.", "Bid", "Ask", "Qty"].map((h) => (
-                <div
-                  key={h}
-                  className="flex-1 h-[38px] flex items-center justify-center text-[12px] text-white"
-                >
-                  {h}
-                </div>
-              ))}
-            </div>
+        {/* ================= CIRCUIT SECTION ================= */}
+        <div className="px-5 py-4 border-b border-[rgba(100,100,100,0.25)] flex gap-5">
 
-            {/* -------- DEPTH ROW -------- */}
-            <div className="flex">
-              <div className="flex-1 h-[41px] flex items-center justify-center text-white">
-                {bidQty}
+          {/* LEFT CIRCUIT */}
+          <div className="flex-1">
+            <p className="text-[12px] text-[#D1C3C3]">
+              Circuit (Lower-Upper)
+            </p>
+
+            <div className="mt-2">
+              <div className="flex h-[6px] rounded overflow-hidden">
+                <div className="w-[60%] bg-main" />
+                <div className="flex-1 bg-main/50" />
               </div>
 
-              <div className="flex-1 h-[41px] flex items-center justify-center text-[#00B306]">
-                {bid.toFixed(2)}
-              </div>
-
-              <div className="flex-1 h-[41px] flex items-center justify-center text-[#B30000]">
-                {ask.toFixed(2)}
-              </div>
-
-              <div className="flex-1 h-[41px] flex items-center justify-center text-white">
-                {askQty}
+              <div className="flex justify-between text-[10px] text-[#D1C3C3] mt-1">
+                <span>8.96</span>
+                <span>10.94</span>
               </div>
             </div>
           </div>
 
-          {/* -------- BUY / SELL PROGRESS -------- */}
-          <BuySellProgress
-            buyPercent={buyPercent}
-            sellPercent={sellPercent}
-            buyQty={bidQty.toString()}
-            sellQty={askQty.toString()}
-          />
-        </>
+          {/* RIGHT CIRCUIT */}
+          <div className="flex-1 text-right">
+            <p className="text-[12px] text-[#D1C3C3]">
+              Circuit (Lower-Upper)
+            </p>
+
+            <div className="mt-2">
+              <div className="flex h-[6px] rounded overflow-hidden">
+                <div className="w-[60%] bg-[#5B298C]" />
+                <div className="flex-1 bg-[#5B298C]/50" />
+              </div>
+
+              <div className="flex justify-between text-[10px] text-[#D1C3C3] mt-1">
+                <span>6.12</span>
+                <span>12.80</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ================= DEPTH HEADER ================= */}
+        <div className="flex px-5 py-2 border-b border-[rgba(100,100,100,0.25)] text-[12px] text-white">
+          <div className="flex-1 text-center">Quantity</div>
+          <div className="flex-1 text-center">Bid</div>
+          <div className="flex-1 text-center">Ask</div>
+          <div className="flex-1 text-center">Qty</div>
+        </div>
+
+        {/* ================= DEPTH ROWS ================= */}
+        {Array.from({ length: 5 }).map((_, i) => {
+          const highlightBuy = i === 1;
+          const highlightSell = i === 3;
+
+          return (
+            <div key={i} className="flex px-5 py-2 gap-5">
+
+              {/* BUY SIDE */}
+              <div className="flex-1">
+                <div
+                  className={`flex justify-between rounded px-2 py-1 ${
+                    highlightBuy ? "bg-[#33BF9020]" : ""
+                  }`}
+                >
+                  <span className="text-[#33BF90] text-[14px]">
+                    {bidQty}
+                  </span>
+                  <span className="text-[#33BF90] text-[14px]">
+                    {bid.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+
+              {/* SELL SIDE */}
+              <div className="flex-1">
+                <div
+                  className={`flex justify-between rounded px-2 py-1 ${
+                    highlightSell ? "bg-[#BF333320]" : ""
+                  }`}
+                >
+                  <span className="text-[#BF3333] text-[14px]">
+                    {ask.toFixed(2)}
+                  </span>
+                  <span className="text-[#BF3333] text-[14px]">
+                    {askQty}
+                  </span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+
+        {/* ================= SHOW DEPTH ================= */}
+        <div className="py-2 text-center text-[12px] font-semibold text-white">
+          Show 30 depth
+        </div>
+      </div>
+
+      {/* ================= BUY SELL PROGRESS ================= */}
+      <BuySellProgress
+        buyPercent={buyPercent}
+        sellPercent={sellPercent}
+        buyQty={bidQty.toString()}
+        sellQty={askQty.toString()}
+      />
+    </>
       ),
     },
 
@@ -145,8 +210,8 @@ const InstrumentDetails = () => {
         <div className="w-full max-w-[412px] px-0 py-[16px] flex flex-col gap-[10px]">
           <div className="flex text-[14px] font-medium text-[#D9D9D9]">
             {["OI Chg", "Call LTP", "Strike Price", "Put LTP", "OI Chg"].map(
-              (h) => (
-                <div key={h} className="flex-1 text-center font-medium">
+              (h,i) => (
+                <div key={i} className="flex-1 text-center font-medium">
                   {h}
                 </div>
               )
@@ -166,7 +231,7 @@ const InstrumentDetails = () => {
                   <div className="flex-1 text-center text-[#B30000]">
                     ₹{row.callLtp}
                   </div>
-                  <div className="flex-1 text-center text-[#D9D9D9]">
+                  <div className="flex-1 text-center text-grayprimary">
                     {row.strike}
                   </div>
                   <div className="flex-1 text-center text-[#00B306]">

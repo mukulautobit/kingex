@@ -21,7 +21,7 @@ function App() {
 
   return (
     <>
-    <div className="w-full md:max-w-[412px] mx-auto h-screen  bg-blackprimar">
+    <div className="w-full md:max-w-[412px] mx-auto h-screen  bg-blacktertiary">
       {/* <Toasty/> */}
     <RouterProvider router={AppRouter}/>
     </div>

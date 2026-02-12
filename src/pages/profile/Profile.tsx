@@ -16,17 +16,19 @@ const Profile = () => {
   return (
     <div
       className="
-        w-full max-w-[412px]
-        min-h-screen
-        px-[20px] py-[10px]
-        flex flex-col justify-between
-        bg-blackprimary
-      "
+      relative
+    w-full max-w-103
+    min-h-screen
+    px-5 py-2.5
+    flex flex-col
+    bg-blacktertiary
+  "
     >
-        <TrendingListHeader label={"Profile"} />
-      {/* ---------- TOP SECTION ---------- */}
+      <TrendingListHeader label={"Profile"} />
+
+      {/* ---------- CONTENT ---------- */}
       <div className="flex flex-col items-center gap-[10px]">
-        
+
         {/* Avatar + Name */}
         <div className="flex flex-col items-center gap-[10px]">
           <div className="w-[175px] h-[175px] rounded-full flex items-center justify-center">
@@ -42,7 +44,7 @@ const Profile = () => {
           </span>
         </div>
 
-        {/* Wallet + Add Money */}
+        {/* Wallet */}
         <div className="w-full flex flex-col">
           <div className="flex justify-between items-center py-[16px]">
             <div className="flex items-center gap-[10px]">
@@ -57,12 +59,12 @@ const Profile = () => {
 
             <button
               className="
-                px-[16px] py-[8px]
-                bg-[rgba(0,179,6,0.2)]
-                border border-[rgba(0,179,6,0.5)]
-                rounded-[8px]
-                text-[10px] text-[#00B306]
-              "
+            px-[16px] py-[8px]
+            bg-[rgba(0,179,6,0.2)]
+            border border-[rgba(0,179,6,0.5)]
+            rounded-[8px]
+            text-[10px] text-[#00B306]
+          "
             >
               Add Money
             </button>
@@ -78,24 +80,25 @@ const Profile = () => {
             Account Details
           </span>
         </div>
-      </div>
 
-      {/* ---------- LOGOUT ---------- */}
-      <div className="py-[20px]">
+        {/* Logout Now Below Content */}
         <button
           onClick={handleLogout}
           className="
-            w-full h-[46px]
-            bg-[#FACA46]
-            rounded-[10px]
-            text-[14px] font-medium
-            text-[#0D0D0D]
-          "
+        w-93 fixed bottom-2.5 h-11.5
+        bg-main
+        rounded-[10px]
+        text-[14px] font-medium
+        text-blackprimary
+        mt-5
+      "
         >
           Logout
         </button>
+
       </div>
     </div>
+
   );
 };
 

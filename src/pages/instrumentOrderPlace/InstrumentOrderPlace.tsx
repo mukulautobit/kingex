@@ -34,7 +34,7 @@ const InstrumentOrderPlace = () => {
   const selectedInstrumentId = useAppSelector(
     (state) => state.instruments.selectedInstrumentId
   );
-    console.log(setMarketPrice)
+    console.log(marketPrice)
   const accountsData = useAppSelector(
     (state) => state.accounts.data as Account[]
   );
@@ -150,7 +150,7 @@ const contractSize =
       />
 
       {/* FIXED HEIGHT */}
-      <div className="w-full h-[calc(100vh-55px)] bg-blackprimary px-4 pt-5 flex flex-col justify-between">
+      <div className="w-full h-[calc(100vh-55px)] bg-bgprimary px-4 pt-5 flex flex-col justify-between">
 
         {/* TOP */}
         <div className="gap-2.5">
@@ -181,7 +181,7 @@ const contractSize =
           </div>
 
           {/* CARD */}
-          <div className="bg-blacksecondary mt-2 rounded-[20px] p-[16px] flex flex-col gap-[20px]">
+          <div className="bg-mainsecondary mt-2 rounded-[20px] p-[16px] flex flex-col gap-[20px]">
 
             {/* Quantity */}
             <div>
@@ -216,7 +216,7 @@ const contractSize =
             </div>
 
             {/* TYPE */}
-            <div className="flex gap-5">
+            <div className="flex flex-end gap-5">
               {["intraday", "longterm"].map((t) => (
                 <label key={t} className="flex items-center gap-2 cursor-pointer">
                   <input

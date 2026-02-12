@@ -7,12 +7,14 @@ import InstrumentOrderPlace from "../pages/instrumentOrderPlace/InstrumentOrderP
 import MyList from "../pages/mylist/MyList";
 import Portfolio from "../pages/portfoliopage/Portfolio";
 import Orders from "../pages/order/Orders";
-import History from "../pages/history/History";
+// import History from "../pages/history/History";
 import ProtectedRoute from "../components/proctedRoute/ProctedRoute";
 import Login from "../pages/login/Login";
 import OtpAuthentication from "../pages/otpAuthentication/OtpAuthentication";
 import AllList from "../pages/allList/AllList";
 import Profile from "../pages/profile/Profile";
+import Wallet from "../pages/wallet/Wallet";
+
 
 
 
@@ -58,7 +60,7 @@ export const AppRouter = createBrowserRouter([
       },
       {
         path: "wallet",
-        element: <History />,
+        element: <Wallet />,
       },
     ],
   },
@@ -73,7 +75,7 @@ export const AppRouter = createBrowserRouter([
     ),
   },
   {
-    path: "/InstrumentOrderPlace/",
+    path: "/InstrumentOrderPlace",
     element: (
       <ProtectedRoute>
         <InstrumentOrderPlace />

@@ -60,26 +60,26 @@ const Login = () => {
     <div 
     className="
     min-h-screen
-     md:m-w-[412px] w-full   bg-gradient-to-tr from-[#FACA46] via-[#0D0D0D] to-black flex flex-col justify-between px-[20px] pt-[47px] pb-[20px]"
+     md:m-w-[412px] w-full   bg-linear-to-tr from-main via-blackprimary to-black flex flex-col justify-between px-[20px] pt-[47px] pb-[20px]"
     >
       
       {/* ---------- TOP ---------- */}
-      <div className="flex flex-col items-center gap-[22px]">
+      <div className="flex flex-col items-center gap-5.5">
         
         {/* Logo */}
-        <div className="w-[353px] h-[149px] flex justify-center items-center">
+        <div className="w-88.35 h-37.35 flex justify-center items-center">
           <img
             src={kingexLogo}
             alt="Kingex"
-            className="w-[129px] h-[129px]"
+            className="w-32.25 h-32.25"
           />
         </div>
 
         {/* Content */}
-        <div className="m-w-[353px] flex flex-col gap-[22px]">
+        <div className="m-w-[353px] flex flex-col gap-5.5">
           
           {/* Header */}
-          <div className="flex flex-col gap-[4px]">
+          <div className="flex flex-col gap-1">
             <h1 className="text-[22px] font-medium text-[#FAFAFA]">
               Let’s get started
             </h1>
@@ -106,7 +106,7 @@ const Login = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="9456-952635"
-                className={`w-full m-w-[305px] mx-auto h-[44px] px-[10px] bg-[#0C0C0C] rounded-[10px]
+                className={`w-full m-w-[305px] mx-auto h-11 px-2.5 bg-[#0C0C0C] rounded-[10px]
                   text-[14px] text-white outline-none
                   ${error ? "border border-[#B30000]" : ""}
                 `}
@@ -123,7 +123,7 @@ const Login = () => {
       </div>
 
       {/* ---------- BOTTOM ---------- */}
-      <div className="w-full max-w-[353px] mx-auto flex flex-col gap-[10px]">
+      <div className="w-full max-w-88.25 mx-auto flex flex-col gap-[10px]">
         
         <p className="text-[10px] text-white text-center">
           KINGEX SECURITIES PRIVATE LIMITED SEBI Regn No.
@@ -134,8 +134,8 @@ const Login = () => {
 
         <button
           onClick={handleContinue}
-          className="w-full h-[44px] bg-[#FACA46] rounded-[10px]
-                     text-[16px] font-medium text-[#0D0D0D]"
+          className="w-full h-11 bg-main rounded-[10px]
+                     text-[16px] font-medium text-grayprimary"
         >
           Continue
         </button>
