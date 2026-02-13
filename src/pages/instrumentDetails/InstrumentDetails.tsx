@@ -10,7 +10,7 @@ const tabs = [
   { id: "summary", label: "Summary", width: "w-[80px]" },
   { id: "optionChain", label: "Option Chain", width: "w-[98px]" },
   { id: "news", label: "News", width: "w-[98px]" },
-  { id: "fundamentals", label: "Fundamentals", width: "w-[98px]" },
+  // { id: "fundamentals", label: "Fundamentals", width: "w-[98px]" },
 ];
 
 interface OptionRow {
@@ -56,6 +56,7 @@ const InstrumentDetails = () => {
   const low = quotes?.l?.[0] ?? 0;
   const prevClose = quotes?.c?.[0] ?? 0;
 
+   const info = instrumentData?.static_data?.info ?? ""; 
   const { buyPercent, sellPercent } =
     calculateBuySellPercent(bid, ask);
 
@@ -100,7 +101,7 @@ const InstrumentDetails = () => {
 
           {/* LEFT CIRCUIT */}
           <div className="flex-1">
-            <p className="text-[12px] text-[#D1C3C3]">
+            <p className="text-[12px] text-graysecondary">
               Circuit (Lower-Upper)
             </p>
 
@@ -110,7 +111,7 @@ const InstrumentDetails = () => {
                 <div className="flex-1 bg-main/50" />
               </div>
 
-              <div className="flex justify-between text-[10px] text-[#D1C3C3] mt-1">
+              <div className="flex justify-between text-[10px] text-graysecondary mt-1">
                 <span>8.96</span>
                 <span>10.94</span>
               </div>
@@ -119,7 +120,7 @@ const InstrumentDetails = () => {
 
           {/* RIGHT CIRCUIT */}
           <div className="flex-1 text-right">
-            <p className="text-[12px] text-[#D1C3C3]">
+            <p className="text-[12px] text-graysecondary">
               Circuit (Lower-Upper)
             </p>
 
@@ -129,7 +130,7 @@ const InstrumentDetails = () => {
                 <div className="flex-1 bg-main/50" />
               </div>
 
-              <div className="flex justify-between text-[10px] text-[#D1C3C3] mt-1">
+              <div className="flex justify-between text-[10px] text-graysecondary mt-1">
                 <span>6.12</span>
                 <span>12.80</span>
               </div>
@@ -153,23 +154,23 @@ const InstrumentDetails = () => {
           return (
             <div key={i} className="flex px-5 py-2 gap-5">
 
-              {/* BUY SIDE */}
+              
               <div className="flex-1">
                 <div
                   className={`flex justify-between rounded px-2 py-1 ${
                     highlightBuy ? "bg-[#33BF9020]" : ""
                   }`}
                 >
-                  <span className="text-[#33BF90] text-[14px]">
+                  <span className="text-greenshadeone text-[14px]">
                     {bidQty}
                   </span>
-                  <span className="text-[#33BF90] text-[14px]">
+                  <span className="text-greenshadeone text-[14px]">
                     {bid.toFixed(2)}
                   </span>
                 </div>
               </div>
 
-              {/* SELL SIDE */}
+              
               <div className="flex-1">
                 <div
                   className={`flex justify-between rounded px-2 py-1 ${
@@ -231,13 +232,13 @@ const InstrumentDetails = () => {
                     {row.oiChgCall}
                   </div>
                   <div className="flex-1 text-center text-[#B30000]">
-                    ₹{row.callLtp}
+                    ₹{ask.toFixed(2)}
                   </div>
                   <div className="flex-1 text-center text-grayprimary">
                     {row.strike}
                   </div>
                   <div className="flex-1 text-center text-[#00B306]">
-                    ₹{row.putLtp}
+                    ₹ {bid.toFixed(2)}
                   </div>
                   <div className="flex-1 text-center text-[#B30000]">
                     {row.oiChgPut}
@@ -256,7 +257,14 @@ const InstrumentDetails = () => {
       content: (
         <div className="p-2.5">
           <p className="text-xs text-grayprimary">
-            Disclaimer : Market data is indicative and subject to change.
+            {
+              info.length > 0? (
+                info
+              ) : (
+                " No information is available now"
+              )
+            }
+           
           </p>
         </div>
       ),

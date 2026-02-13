@@ -39,6 +39,8 @@ export const CONSOLE =  "fintrabit.positions[status=\"console\"]"
 
 export const CHAT_HISTORY_LIMIT = 20;
 
+export const Client_id = "1060426546086-i56i1ka8ol18rlb6jq83ouiltuoe9fes.apps.googleusercontent.com"
+
 export const TOKEN = 
   localStorage.getItem("token") ||
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uIjoiQUNDLTQ2OThmOGJhNGFkODRhMmM4NDFjNjUyYWVjNTI2YjhlIiwiYWNjaWQiOiJlYTg5MWU0OS02ZjA3LTQyODgtODU0NC01MmY5OTdmZTdkM2UiLCJyb2xlIjoiYWNjb3VudCIsImlwIjoiMTAzLjE1OC4yMzkuMTQ1In0.XHQWbzaN8YcL5GXjTjZ1xdRyRKNcQFDR7U4tBzL2u5g";

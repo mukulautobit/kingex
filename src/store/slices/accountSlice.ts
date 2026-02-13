@@ -137,19 +137,19 @@ export const fetchAccounts = createAsyncThunk(
   "accounts/fetchAll",
   async (_, { dispatch, rejectWithValue }) => {
     try {
-      dispatch(showLoader());
+      // dispatch(showLoader());
       console.log("Waiting for WebSocket connection...");
 
       // Wait for connection before sending
       return await new Promise<Account[]>((resolve, reject) => {
         apiClient.onConnected(async () => {
           try {
-            console.log("✅ WebSocket connected, fetching accounts...");
+            console.log(" WebSocket connected, fetching accounts...");
 
             const accountsRes = await apiClient.send<Account[]>("query", {
               query: "fintrabit.accounts",
             });
-
+              console.log(accountsRes)
             if (accountsRes.status === "success") {
               const accounts = accountsRes.data || [];
               resolve(accounts);  // Resolve with accounts data only

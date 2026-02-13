@@ -1,9 +1,12 @@
-import  {useState} from 'react'
-import kingexLogo  from "../../assets/icons/kingxlogo.svg"
+import { useState } from 'react'
+import kingexLogo from "../../assets/icons/kingxlogo.svg"
 import { useNavigate } from "react-router-dom";
 import { sendOtp } from "../../service/api";
 import { showToasty } from '../../store/slices/notificationSlice';
 import { useAppDispatch } from '../../store/hook';
+// import { GoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
+import google from "../../assets/icons/google.svg"
 
 
 
@@ -19,53 +22,79 @@ import { useAppDispatch } from '../../store/hook';
 const Login = () => {
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
-    const navigate = useNavigate()
+  const navigate = useNavigate()
 
 
   const dispatch = useAppDispatch()
   const handleContinue = async () => {
-  if (phone.trim().length !== 10) {
-    console.log(phone)
-    setError("Please Enter Correct Number");
-    return;
-  }
-
-  setError("");
-
-  try {
-    console.log("before send")
-    const res = await sendOtp("+91", phone);
-    console.log("OTP SENT:", res);
-    
-    if(res.status ==="success"){
-
-      dispatch(
-          showToasty({
-          type: "success",
-          message: "OTP successfully"
-        }))
+    if (phone.trim().length !== 10) {
+      console.log(phone)
+      setError("Please Enter Correct Number");
+      return;
     }
 
-    navigate("/optauthentication", {
-      state: { phone }
-    });
+    setError("");
 
-  } catch (err) {
-    console.log(err);
-    alert("Failed to send OTP");
-  }
-};
+    try {
+      console.log("before send")
+      const res = await sendOtp("+91", phone);
+      console.log("OTP SENT:", res);
+
+      if (res.status === "success") {
+
+        dispatch(
+          showToasty({
+            type: "success",
+            message: "OTP successfully"
+          }))
+      }
+
+      navigate("/optauthentication", {
+        state: { phone }
+      });
+
+    } catch (err) {
+      console.log(err);
+      alert("Failed to send OTP");
+    }
+  };
+
+
+  const googleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse: any) => {
+      try {
+        console.log("Google Success:", tokenResponse);
+
+        // tokenResponse.access_token
+        // Send this token to backend if needed
+
+        dispatch(
+          showToasty({
+            type: "success",
+            message: "Google login successful",
+          })
+        );
+
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    onError: () => {
+      console.log("Google login failed");
+    },
+  });
+
 
   return (
-    <div 
-    className="
+    <div
+      className="
     min-h-screen
      md:m-w-[412px] w-full   bg-linear-to-tr from-main via-blackprimary to-black flex flex-col justify-between px-[20px] pt-[47px] pb-[20px]"
     >
-      
+
       {/* ---------- TOP ---------- */}
       <div className="flex flex-col items-center gap-5.5">
-        
+
         {/* Logo */}
         <div className="w-88.35 h-37.35 flex justify-center items-center">
           <img
@@ -77,7 +106,7 @@ const Login = () => {
 
         {/* Content */}
         <div className="m-w-[353px] flex flex-col gap-5.5">
-          
+
           {/* Header */}
           <div className="flex flex-col gap-1">
             <h1 className="text-[22px] font-medium text-[#FAFAFA]">
@@ -94,10 +123,10 @@ const Login = () => {
               Enter your number
             </span>
 
-            <div className="flex gap-[4px]">
-              
+            <div className="flex gap-1">
+
               {/* Country Code */}
-              <div className="w-[44px] h-[44px] bg-[#0C0C0C] rounded-[10px] flex items-center justify-center">
+              <div className="w-11 h-11 bg-[#0C0C0C] rounded-[10px] flex items-center justify-center">
                 <span className="text-[14px] text-white">+91</span>
               </div>
 
@@ -118,13 +147,29 @@ const Login = () => {
                 {error}
               </span>
             )}
+            {/* <GoogleLogin
+            onSuccess={handleGoogleSuccess}
+            onError={() => console.log("Google login failed")}
+            /> */}
+            <div className="flex gap-3 mt-3">
+              <div
+                onClick={() => googleLogin()}
+                className="flex flex-1 items-center justify-center gap-2 
+               rounded border border-[#3D3D3D] 
+               py-2 text-sm cursor-pointer hover:bg-white/5 transition"
+              >
+                <img src={google} alt="Google" className="w-5 h-5" />
+                <span className="text-white">Continue with Google</span>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
 
       {/* ---------- BOTTOM ---------- */}
       <div className="w-full max-w-88.25 mx-auto flex flex-col gap-[10px]">
-        
+
         <p className="text-[10px] text-white text-center">
           KINGEX SECURITIES PRIVATE LIMITED SEBI Regn No.
           INZ000358317 NSE TM Code: 13942 | BSE TM Code: 6515

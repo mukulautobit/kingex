@@ -74,24 +74,24 @@ const Toasty = () => {
       {/* Toast */}
       <div
         className={`
-    relative z-[10001]
-    min-w-[250px] h-[44px]
-    px-4 py-2
-    rounded-[10px]
-    text-[16px] font-medium
-    shadow-[0_4px_15px_rgba(0,0,0,0.3)]
-    flex items-center justify-center
-    pointer-events-auto
-    text-white
+        relative z-10001
+        min-w-62.5 h-11
+        px-4 py-2
+        rounded-[10px]
+        text-[16px] font-medium
+        shadow-[0_4px_15px_rgba(0,0,0,0.3)]
+        flex items-center justify-center
+        pointer-events-auto
+      text-white
 
-    ${isSuccess && "bg-main"}
-    ${isError && "bg-red-600"}
-    ${!isSuccess && !isError && "bg-[#2A2A2A]"}
+      ${isSuccess && "bg-main"}
+      ${isError && "bg-red-600"}
+      ${!isSuccess && !isError && "bg-[#2A2A2A]"}
 
-    ${isExiting
+      ${isExiting
             ? "animate-[slideOutUp_0.3s_ease-in_forwards]"
             : "animate-[slideInDown_0.4s_cubic-bezier(0.175,0.885,0.32,1.275)_forwards]"
-          }
+      }
   `}
       >
 

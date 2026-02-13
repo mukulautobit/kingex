@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TrendingListHeader from "../../components/tradingListHeader/TrendingListHeader";
 import rightArrowblack from "../../assets/icons/rightarrowblack.svg";
 import exchangeIcon from "../../assets/icons/exchangeIcon.svg";
@@ -8,11 +8,16 @@ import { type PlaceOrderPayload } from "../../store/slices/ordersSlice";
 import { placeOrderStock } from "../../service/api";
 import { showToasty } from "../../store/slices/notificationSlice";
 import { fetchAccounts } from "../../store/slices/accountSlice";
+import { motion, AnimatePresence } from "framer-motion";
+import placeOrdersuccessfullIcon from "../../assets/icons/placeordersuccessFullIcon.svg"
+import placeOrderfailIcon from "../../assets/icons/placeorderfailIcons.svg"
+import grayrightArrow from "../../assets/icons/grayrightArrow.svg"
+import loderIcon from "../../assets/icons/loader.svg"
 
 interface Account {
   id: string;
   username: string;
-  balance: number;      
+  balance: number;
   currency?: string;
   type?: string;
 }
@@ -24,17 +29,21 @@ const InstrumentOrderPlace = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const knobRef = useRef<HTMLDivElement>(null);
 
-  const [quantity, setQuantity] = useState<number>(1);
+  const [quantity, setQuantity] = useState<string>("1");
   const [marketPrice, setMarketPrice] = useState<number>(1);
   const [exchange, setExchange] = useState<"NSE" | "BSE">("NSE");
   const [value, setValue] = useState<"intraday" | "longterm">("intraday");
   const [dragX, setDragX] = useState(0);
   const [confirmed, setConfirmed] = useState(false);
+  const [orderStatus, setOrderStatus] = useState<"success" | "fail" | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const navigation = useNavigate()
 
   const selectedInstrumentId = useAppSelector(
     (state) => state.instruments.selectedInstrumentId
   );
-    console.log(marketPrice)
+  console.log(marketPrice)
   const accountsData = useAppSelector(
     (state) => state.accounts.data as Account[]
   );
@@ -43,19 +52,26 @@ const InstrumentOrderPlace = () => {
   const accountUsernames = accountsData.map((acc) => acc.username);
   const [selectedAccount, setSelectedAccount] = useState<string>("");
   console.log(accountsData)
-  console.log(side , instrumentData)
+  console.log(instrumentData)
   const dispatch = useAppDispatch();
 
   // const accountBalance =
   // accountsData.find(acc => acc.username === selectedAccount)?.balance || 0;
 
-const ltp =
-  instrumentData?.dinamic_data?.quotes?.ltp?.[0] || 0;
+  const ltp =
+    instrumentData?.dinamic_data?.quotes?.ltp?.[0] || 0;
 
-const contractSize =
-  instrumentData?.static_data?.contractsize || 1;
+  const contractSize =
+    instrumentData?.static_data?.contractsize || 1;
 
-  const requiredBalance =  ltp * quantity * contractSize;
+  const quotes = instrumentData?.dinamic_data?.quotes;
+
+  const price =
+    side === "buy"
+      ? quotes?.ask?.[0] ?? 0
+      : quotes?.bid?.[0] ?? 0;
+
+  const requiredBalance = ltp * Number(quantity) * contractSize;
   const availableBalance = accountsData[0]?.balance - requiredBalance;
 
   useEffect(() => {
@@ -70,8 +86,10 @@ const contractSize =
   }, [accountUsernames, selectedAccount]);
 
   const handleSlideConfirm = async () => {
+    console.log("handle slice confirm before")
     if (!instrumentData || !selectedInstrumentId) return;
-
+      setIsLoading(true)
+    console.log("handle slice confirm")
     const selectedAccountId =
       accountsData.find((acc) => acc.username === selectedAccount)?.id || "";
 
@@ -79,32 +97,50 @@ const contractSize =
       account_id: selectedAccountId,
       instrument_id: selectedInstrumentId,
       order_type: "market",
-      price: instrumentData.price,
-      qty: quantity,
+      price: price,
+      qty: Number(quantity),
       side: side,
       stoploss: 4,
       target: 8,
     };
-
+    console.log(payload)
     const response = await placeOrderStock(payload);
-
-    if (response?.stats === "success") {
+      setIsLoading(false)
+    if (response && (response.stats === "success" || response.status === "success" || response.success === true)) {
+      console.log("success")
+      setOrderStatus("success");
+      const msg = side ==="buy" ? "Order placed successfully" : " sell successfully"
       dispatch(
         showToasty({
-          message: "Order placed successfully",
+          message: msg,
           type: "success",
           price: payload.price,
           quantity: payload.qty,
           status: "filled",
         })
       );
+    } else {
+      setOrderStatus("fail");
     }
+
   };
+
+  useEffect(() => {
+    if (orderStatus) {
+      setTimeout(() => {
+        setOrderStatus(null);
+        setDragX(0);
+        navigation("/mylist")
+        setConfirmed(false);
+        
+      }, 2000);
+    }
+  }, [orderStatus]);
 
   const quentyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value.replace(/^0+(?=\d)/, "");
-    if (value !== "") setQuantity(Number(value));
-  };
+    setQuantity(value);
+  }
 
   const maxDrag = 230;
 
@@ -193,6 +229,7 @@ const contractSize =
                   type="number"
                   value={quantity}
                   onChange={quentyChange}
+                  min="1"
                   className="flex-1 bg-transparent outline-none px-[12px] text-white"
                 />
                 <button className="w-11 h-full flex items-center justify-center border-l border-[rgba(217,217,217,0.2)]">
@@ -238,7 +275,7 @@ const contractSize =
 
           <div className="flex justify-between text-[12px] text-[#D2D2D2] mb-[10px]">
             <div>
-              Amount <span className="text-main">₹{accountsData[0]?.balance}</span> 
+              Amount <span className="text-main">₹{accountsData[0]?.balance}</span>
               {/* <span className="text-main"> ₹2.02</span> */}
             </div>
             <div>
@@ -265,12 +302,92 @@ const contractSize =
               className="absolute w-14 h-14 bg-main rounded-full
                          flex items-center justify-center cursor-pointer"
             >
-              <img src={rightArrowblack} className="w-6 h-6" />
+              <img src={grayrightArrow} className="text-grayprimary w-3 h-3" />
             </div>
           </div>
 
         </div>
       </div>
+
+      {/* ===== LOADER FULL SCREEN OVERLAY ===== */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div
+            className="fixed inset-0 z-40 bg-blackprimary flex flex-col items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.img
+              src={loderIcon}
+              className="w-[48px] h-[48px] animate-spin"
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3 }}
+            />
+            <motion.p
+              className="text-grayprimary text-[12px] mt-4"
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              placing order
+            </motion.p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ===== SUCCESS / FAIL FULL SCREEN OVERLAY ===== */}
+      <AnimatePresence>
+
+        {orderStatus && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-[#121212] flex flex-col items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.img
+              src={
+                orderStatus === "success"
+                  ? placeOrdersuccessfullIcon
+                  : placeOrderfailIcon
+              }
+              initial={{ scale: 0 }}
+              animate={{ scale: [0, 1.2, 1] }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+              }}
+              className="w-32 h-32"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="mt-6 text-center text-white"
+            >
+              <p className="text-lg font-semibold">
+                {orderStatus === "success"
+                  ? "Order Placed Successfully"
+                  : "Order Failed"}
+              </p>
+
+              {orderStatus === "success" && (
+                <>
+                  <p className="text-sm opacity-70 mt-2">
+                    {side?.toUpperCase()} {quantity}
+                  </p>
+                  <p className="text-sm opacity-70">
+                    {instrumentData?.trading_name} at {price}
+                  </p>
+                </>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

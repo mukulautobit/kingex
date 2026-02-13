@@ -108,7 +108,7 @@ console.log(phone)
 
   /* ---------------- SUCCESS ---------------- */
 
-  if ("success" === "success") {
+  if (screen === "success") {
     localStorage.setItem("ASSESS","Allow")
     return <LoginSuccessfulPage onGoHome={() => navigate("/")} />;
   }
